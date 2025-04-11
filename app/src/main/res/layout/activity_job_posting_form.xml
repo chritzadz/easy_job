@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/postJobButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="162dp"
+        android:layout_marginEnd="159dp"
+        android:layout_marginBottom="67dp"
+        android:text="Post Job"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/jobName"
+        android:layout_width="215dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="5dp"
+        android:ems="10"
+        android:hint="Job Name"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/jobCategory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/jobCategory"
+        android:layout_width="308dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="5dp"
+        android:entries="@array/job_categories"
+        app:layout_constraintBottom_toTopOf="@+id/jobDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobName" />
+
+    <EditText
+        android:id="@+id/jobDescription"
+        android:layout_width="311dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="51dp"
+        android:layout_marginBottom="5dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Enter Job Description"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/jobLocation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobCategory" />
+
+    <EditText
+        android:id="@+id/jobLocation"
+        android:layout_width="231dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="106dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginBottom="5dp"
+        android:ems="10"
+        android:hint="Enter City"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/jobPay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobDescription" />
+
+    <EditText
+        android:id="@+id/jobPay"
+        android:layout_width="232dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="93dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="86dp"
+        android:layout_marginBottom="5dp"
+        android:ems="10"
+        android:hint="Pay Amount"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toTopOf="@+id/etJobHours"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobLocation" />
+
+    <EditText
+        android:id="@+id/etJobHours"
+        android:layout_width="232dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="93dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="86dp"
+        android:layout_marginBottom="50dp"
+        android:ems="10"
+        android:hint="Estimated hours"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/postJobButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobPay" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

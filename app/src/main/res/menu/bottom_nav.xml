@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_job"
+        android:icon="@drawable/ic_job_logo"
+        android:title="" />
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home_logo"
+        android:title="" />
+    <item
+        android:id="@+id/nav_settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_setting_logo" />
+</menu>

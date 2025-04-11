@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Template</string>
+    <string name="UNKNOWN_EMAIL">No account found with this email address</string>
+    <string name="INCORRECT_PASSWORD">Incorrect Password</string>
+    <string name="NO_EMAIL">"Please enter an email address"</string>
+    <string name="NO_PASSWORD">"Please enter a password"</string>
+    <string name="EMAIL_ERROR">"Enter an email address of the form user@example.com"</string>
+    <string name="PASSWORD_ERROR">"Password must be at least 8 characters long, contain uppercase, lowercase, digit, and special character"</string>
+    <string name="PASSWORD_NOT_MATCH">"Confirm new password do no match"</string>
+    <string name="EMAIL_EXIST">"Success"</string>
+    <string name="SUCCESS">"Success"</string>
+    <string name="NO_ACCOUNT">Please make an account</string>
+    <string name="FIREBASE_ERROR">"firebase error"</string>
+    <string name="CREDENTIALS_FILE_PATH">"key.json"</string>
+    <string-array name="job_categories">
+        <item>Gardening</item>
+        <item>Pet Care</item>
+        <item>Cleaning</item>
+        <item>Delivery</item>
+        <item>Tutoring</item>
+    </string-array>
+    <string name="TO_DO_STATUS">"To do"</string>
+    <string name="ACCEPT_STATUS">"Accept"</string>
+    <string name="DECLINE_STATUS">"Decline"</string>
+    <string name="COMPLETED_STATUS">"Complete"</string>
+    <string name="PAID_STATUS">"Paid"</string>
+
+
+</resources>
