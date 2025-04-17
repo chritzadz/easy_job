@@ -50,56 +50,6 @@
             android:name=".view.DashboardActivity"
             android:exported="true" />
 
-        <activity
-            android:name=".view.SettingsActivity"
-            android:exported="true" />
-
-        <activity
-            android:name=".view.ResetPasswordActivity"
-            android:exported="true" />
-
-        <activity
-            android:name=".view.ResetPasswordFormActivity"
-            android:exported="true" />
-
-        <activity android:name=".view.SwitchRoleActivity"
-            android:exported="true"/>
-
-        <activity android:name=".view.JobActivity"
-            android:exported="true"/>
-
-        <activity
-            android:name=".view.JobDetailsActivity"
-            android:exported="true"/>
-
-        <activity
-            android:name=".view.JobApplicationActivity"
-            android:exported="true"/>
-
-        <activity android:name=".view.JobPostingFormActivity"
-            android:exported="true"/>
-
-        <activity android:name=".view.ApplicationListActivity"
-            android:exported="true"/>
-
-        <activity android:name=".view.ApplicationDetailsActivity"
-            android:exported="true"/>
-
-        <activity android:name=".view.MapActivity"
-            android:exported="true"/>
-
-        <activity android:name=".view.EmployerApplicationListActivity"
-            android:exported="true"/>
-
-        <activity android:name=".view.AppliedJobListActivity"
-            android:exported="true"/>
-
-        <activity android:name=".view.AppliedJobDetailsActivity"
-            android:exported="true"/>
-
-        <activity android:name=".view.PaymentEmployerActivity"
-            android:exported="true"/>
-
         <service
             android:name=".util.MyFirebaseMessagingService"
             android:exported="false">

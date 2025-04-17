@@ -8,7 +8,6 @@ package com.example.template.model;
  */
 
 public class Employee extends User{
-
     private String jobFilter;
     private String jobFilterCriteria;
 

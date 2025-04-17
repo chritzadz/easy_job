@@ -16,7 +16,7 @@ public class Application implements Serializable {
     private String status;
     private String key;
     private String jobKey;
-    private boolean isDecided = false; // New field
+    private boolean isDecided = false;
 
 
     public Application() {}

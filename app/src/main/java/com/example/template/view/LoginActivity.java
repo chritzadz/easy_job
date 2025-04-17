@@ -3,7 +3,6 @@ package com.example.template.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,17 +10,23 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.template.Firebase.FirebaseUseCase;
 import com.example.template.R;
+import com.example.template.controller.CredentialCheckUseCase;
+import com.example.template.factory.UserRoleFactory;
 import com.example.template.model.CurrentUser;
 import com.example.template.model.Employee;
-import com.example.template.util.FirebaseCRUD;
+import com.example.template.Firebase.FirebaseCRUD;
+import com.example.template.model.User;
+import com.example.template.status.Status;
+import com.example.template.status.SuccessStatus;
+import com.example.template.status.UserNotExistStatus;
 
 public class LoginActivity extends AppCompatActivity {
-    FirebaseCRUD crud = FirebaseCRUD.getInstance(this);
     private EditText emailEditText;
     private EditText passwordEditText;
     private Button loginButton;
-    private TextView statusMessage;
+    private TextView statusText;
     private TextView signUpLink;
 
     @Override
@@ -47,37 +52,33 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailEditText.getText().toString().trim(); //get entered email
         String password = passwordEditText.getText().toString().trim(); //get entered password
 
-        crud.findUserByEmail(email).addOnSuccessListener(findUser -> {
-            if (findUser != null) {
-                if (findUser.getPassword().equals(password)) {
-                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
-                    Log.d("User class Employee", String.valueOf(findUser instanceof Employee));
-                    CurrentUser.getInstance().setUser(findUser);
-                    move2DashboardActivity();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Incorrect password", Toast.LENGTH_LONG).show();
-                    setStatusMessage(getString(R.string.INCORRECT_PASSWORD));
-                }
-            } else {
-                Toast.makeText(LoginActivity.this, "Email not found", Toast.LENGTH_LONG).show();
-                setStatusMessage(getString(R.string.UNKNOWN_EMAIL));
+        Status status = CredentialCheckUseCase.validateSignUp(email, password);
+        if(status.equals(new SuccessStatus())){
+            User user = findUser(email);
+            if (user != null){
+                CurrentUser.getInstance().setUser(user);
+                move2DashboardActivity();
             }
-        }).addOnFailureListener(e -> {
+            else{
+                displayErrorMessage(new UserNotExistStatus());
+            }
+        }
+        else{
+            displayErrorMessage(status);
+        }
+    }
 
-        });
+    private User findUser(String email) {
+        FirebaseUseCase fuc = new FirebaseUseCase(this);
+        return fuc.findUserByEmail(email);
     }
 
     private void setContents() {
         emailEditText = findViewById(R.id.loginEditTextEmailAddress);
         passwordEditText = findViewById(R.id.logineditTextPassword);
         loginButton = findViewById(R.id.loginButton);
-        statusMessage = findViewById(R.id.statusLabel);
+        statusText = findViewById(R.id.statusLabel);
         signUpLink = findViewById(R.id.textViewForSignUpLink);
-    }
-
-
-    protected void setStatusMessage(String message) {
-        statusMessage.setText(message.trim());
     }
 
     protected void move2DashboardActivity(){
@@ -85,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void setCrud(FirebaseCRUD mockFirebase) {
-        crud = mockFirebase;
+    private void displayErrorMessage(Status status) {
+        statusText.setText(status.message());
     }
 }
