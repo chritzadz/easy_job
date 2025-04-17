@@ -49,7 +49,7 @@
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             FirebaseApp.initializeApp(this);
-            crud = FirebaseCRUD.getInstance();
+            crud = FirebaseCRUD.getInstance(this);
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_register);

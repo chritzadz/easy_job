@@ -53,7 +53,7 @@ public class JobPostingFormActivity extends AppCompatActivity {
     private Spinner categorySpinner;
     private EditText jobPay;
     private EditText jobHours;
-    FirebaseCRUD crud = FirebaseCRUD.getInstance();
+    FirebaseCRUD crud = FirebaseCRUD.getInstance(this);
 
     public static final String CREDENTIALS_FILE_PATH = "key.json";
 

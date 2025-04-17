@@ -35,7 +35,7 @@ import java.util.ArrayList;
 
 public class JobActivity extends AppCompatActivity implements LocationHelper.LocationCallback, JobAdapter.JobClickListener, JobAdapter.viewLocationClickListener{
     LocationHelper locationHelper;
-    FirebaseCRUD crud = FirebaseCRUD.getInstance();
+    FirebaseCRUD crud = FirebaseCRUD.getInstance(this);
     private ArrayList<Job> jobList;
     private ArrayList<Job> filteredJobs;
     String currCity;

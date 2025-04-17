@@ -14,7 +14,7 @@ import com.example.template.model.Job;
 import com.example.template.util.FirebaseCRUD;
 
 public class AppliedJobDetailsActivity extends AppCompatActivity {
-    FirebaseCRUD crud = FirebaseCRUD.getInstance();
+    FirebaseCRUD crud = FirebaseCRUD.getInstance(this);
     Job job;
 
     private TextView jobTitle;

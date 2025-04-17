@@ -27,7 +27,7 @@ import java.util.ArrayList;
  */
 
 public class ApplicationListActivity extends AppCompatActivity implements ApplicationAdapter.ApplicationClickListener {
-    FirebaseCRUD crud = FirebaseCRUD.getInstance();
+    FirebaseCRUD crud = FirebaseCRUD.getInstance(this);
     private Job job;
 
     private Button backButton;

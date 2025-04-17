@@ -19,11 +19,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.template.R;
-import com.example.template.model.CurrentUser;
-import com.example.template.model.Employee;
-import com.example.template.model.User;
-import com.example.template.util.FirebaseCRUD;
-import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * @file FilterActivity.java

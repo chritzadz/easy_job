@@ -16,7 +16,7 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.example.template"
+        applicationId "com.easyjob.application"
         minSdk 30
         targetSdk 35
         versionCode 1

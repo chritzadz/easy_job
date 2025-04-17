@@ -1,5 +1,8 @@
 package com.example.template.util;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
+import android.content.Context;
 import android.util.Log;
 import androidx.annotation.NonNull;
 
@@ -47,12 +50,14 @@ public class FirebaseCRUD {
     private Job jobsList;
     private Application appsList;
     private static FirebaseCRUD instance;
+    private Context context;
 
     /**
      * Private constructor to initialize Firebase database references.
      */
-    private FirebaseCRUD() {
-        this.database = FirebaseDatabase.getInstance(String.valueOf(R.string.firebase_ref));
+    private FirebaseCRUD(Context context) {
+        this.context = context;
+        this.database = FirebaseDatabase.getInstance(context.getString(R.string.firebase_ref));
         initializeDatabaseRef();
         initializeDatabaseRefListeners();
     }
@@ -61,9 +66,9 @@ public class FirebaseCRUD {
      * Returns the singleton instance of FirebaseCRUD.
      * @return The FirebaseCRUD instance
      */
-    public static FirebaseCRUD getInstance() {
+    public static FirebaseCRUD getInstance(Context context) {
         if (instance == null) {
-            instance = new FirebaseCRUD();
+            instance = new FirebaseCRUD(context);
         }
         return instance;
     }

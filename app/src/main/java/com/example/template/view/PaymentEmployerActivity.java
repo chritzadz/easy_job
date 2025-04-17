@@ -34,7 +34,7 @@ public class PaymentEmployerActivity extends AppCompatActivity {
      *      expiry date: 03/2030
      *      cvc code: any 3 digits
      * */
-    FirebaseCRUD crud = FirebaseCRUD.getInstance();
+    FirebaseCRUD crud = FirebaseCRUD.getInstance(this);
     private static final String TAG = PaymentEmployerActivity.class.getName();
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private PayPalConfiguration payPalConfig;

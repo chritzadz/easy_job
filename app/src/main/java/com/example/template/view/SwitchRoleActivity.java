@@ -28,7 +28,7 @@ public class SwitchRoleActivity extends AppCompatActivity {
     private Button confirmEmail;
     private EditText emailBox;
     private TextView warningText;
-    FirebaseCRUD crud = FirebaseCRUD.getInstance();
+    FirebaseCRUD crud = FirebaseCRUD.getInstance(this);
 
     /**
      * Initializes activity and sets user interface

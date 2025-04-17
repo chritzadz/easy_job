@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private TextView statusMessage;
     private TextView signUpLink;
-    FirebaseCRUD crud = FirebaseCRUD.getInstance();
+    FirebaseCRUD crud = FirebaseCRUD.getInstance(this);
 
     /**
      * Initializes activity and set user interface

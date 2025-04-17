@@ -41,7 +41,7 @@ public class EmployeeFragment extends Fragment implements LocationHelper.Locatio
     private ArrayList<Job> jobList;
     private String currCity;
     View view;
-    FirebaseCRUD crud = FirebaseCRUD.getInstance();
+    FirebaseCRUD crud = FirebaseCRUD.getInstance(getContext());
     LocationHelper locationHelper;
     ArrayList<String> appliedJobsID = new ArrayList<>();
 

@@ -31,7 +31,7 @@ public class ApplicationDetailsActivity extends AppCompatActivity {
     private String applicationId;
     private String prevPage;
     private Button backButton;
-    FirebaseCRUD crud = FirebaseCRUD.getInstance();
+    FirebaseCRUD crud = FirebaseCRUD.getInstance(this);
 
     /**
      * Initializes activity and set user interface

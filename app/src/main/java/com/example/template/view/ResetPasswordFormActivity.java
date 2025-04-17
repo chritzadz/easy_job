@@ -29,7 +29,7 @@ public class ResetPasswordFormActivity extends AppCompatActivity{
     private EditText passEditText;
     private EditText confirmPassEditText;
     private TextView warningText;
-    FirebaseCRUD crud = FirebaseCRUD.getInstance();
+    FirebaseCRUD crud = FirebaseCRUD.getInstance(this);
 
     /**
      * Initializes activity and set user interface

@@ -22,7 +22,7 @@ import com.example.template.util.FirebaseCRUD;
 import java.util.ArrayList;
 
 public class AppliedJobListActivity extends AppCompatActivity implements JobAdapter.JobClickListener{
-    FirebaseCRUD crud = FirebaseCRUD.getInstance();
+    FirebaseCRUD crud = FirebaseCRUD.getInstance(this);
     private ArrayList<Job> jobList;
     private Button backButton;
 

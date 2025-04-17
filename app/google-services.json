@@ -1,22 +1,22 @@
 {
   "project_info": {
-    "project_number": "921083539796",
-    "firebase_url": "https://group10-quickcash-default-rtdb.firebaseio.com",
-    "project_id": "group10-quickcash",
-    "storage_bucket": "group10-quickcash.firebasestorage.app"
+    "project_number": "911449455137",
+    "firebase_url": "https://easy-job-79681-default-rtdb.firebaseio.com",
+    "project_id": "easy-job-79681",
+    "storage_bucket": "easy-job-79681.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:921083539796:android:69ed537646dd5f6f6618c1",
+        "mobilesdk_app_id": "1:911449455137:android:132df0d1bbf45a0eef4160",
         "android_client_info": {
-          "package_name": "com.example.template"
+          "package_name": "com.easyjob.application"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC9giMb-_T00B8JaNUxFVYnvyyAMKgD_0k"
+          "current_key": "AIzaSyDjctEJwBBNnV6ugnrCYNhQNm7qcqmlQzE"
         }
       ],
       "services": {

@@ -35,7 +35,7 @@ import java.util.ArrayList;
  */
 
 public class EmployerFragment extends Fragment implements JobAdapter.JobClickListener, JobAdapter.viewLocationClickListener{
-    FirebaseCRUD crud = FirebaseCRUD.getInstance();
+    FirebaseCRUD crud = FirebaseCRUD.getInstance(getContext());
     private ArrayList<Job> jobList;
     Button addJobButton;
     View view;

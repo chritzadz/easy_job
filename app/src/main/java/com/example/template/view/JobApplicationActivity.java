@@ -34,7 +34,7 @@ public class JobApplicationActivity extends AppCompatActivity {
     private Button submitButton;
     private Job job;
     private User user;
-    FirebaseCRUD crud = FirebaseCRUD.getInstance();
+    FirebaseCRUD crud = FirebaseCRUD.getInstance(this);
 
     /**
      * Initializes activity and set user interface
