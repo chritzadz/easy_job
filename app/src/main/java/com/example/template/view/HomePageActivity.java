@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.Manifest;
-import android.view.View;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
@@ -17,12 +16,6 @@ import androidx.core.content.ContextCompat;
 import com.example.template.R;
 import com.google.firebase.FirebaseApp;
 
-/**
- * @file HomePageActivity.java
- * @author: -
- * @description: Initial activity to choose wither login or to signup
- */
-
 public class HomePageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +25,9 @@ public class HomePageActivity extends AppCompatActivity {
 
         final ImageView logoImageView = findViewById(R.id.logoImageView);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
             }
-        }
 
 
         logoImageView.postDelayed(() -> {
@@ -52,7 +43,7 @@ public class HomePageActivity extends AppCompatActivity {
 
             zoomAnimation.setAnimationListener(new Animation.AnimationListener() {
                 @Override
-                public void onAnimationStart(Animation animation) {}
+                public void onAnimationStart(Animation animation) { return; }
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
@@ -62,7 +53,7 @@ public class HomePageActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onAnimationRepeat(Animation animation) {}
+                public void onAnimationRepeat(Animation animation) {return; }
             });
         }, 3000);
     }

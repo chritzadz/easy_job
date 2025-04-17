@@ -16,25 +16,14 @@ import com.example.template.model.CurrentUser;
 import com.example.template.model.Employee;
 import com.example.template.util.FirebaseCRUD;
 
-/**
- * @file LoginActivity.java
- * @author: -
- * @description: Activity that prompts user for existing email and it's correlated password.
- * If successful, user will be redirected to dashboard
- */
-
 public class LoginActivity extends AppCompatActivity {
+    FirebaseCRUD crud = FirebaseCRUD.getInstance(this);
     private EditText emailEditText;
     private EditText passwordEditText;
     private Button loginButton;
     private TextView statusMessage;
     private TextView signUpLink;
-    FirebaseCRUD crud = FirebaseCRUD.getInstance(this);
 
-    /**
-     * Initializes activity and set user interface
-     * @param savedInstanceState The saved instance state bundle
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,30 +33,19 @@ public class LoginActivity extends AppCompatActivity {
         setEventListeners();
     }
 
-    /**
-     * Initializes each components listeners
-     */
     private void setEventListeners() {
-        signUpLink.setOnClickListener(this::move2SignUp);
-        loginButton.setOnClickListener(this::onLoginButtonClick);
+        signUpLink.setOnClickListener( v -> move2SignUp());
+        loginButton.setOnClickListener(v -> checkCredentials());
     }
 
-    /**
-     * Navigate to the RegisterActivity
-     */
-    protected void move2SignUp(View view){
+    protected void move2SignUp(){
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
     }
 
-    /**
-     * Handles the click event for login button
-     * @param view The view that was clicked
-     */
-    private void onLoginButtonClick(View view) {
-        Log.d("Button", "is CLICKED");
-        String email = emailEditText.getText().toString().trim();
-        String password = passwordEditText.getText().toString().trim();
+    private void checkCredentials() {
+        String email = emailEditText.getText().toString().trim(); //get entered email
+        String password = passwordEditText.getText().toString().trim(); //get entered password
 
         crud.findUserByEmail(email).addOnSuccessListener(findUser -> {
             if (findUser != null) {
@@ -89,9 +67,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Initializes content components of the interface
-     */
     private void setContents() {
         emailEditText = findViewById(R.id.loginEditTextEmailAddress);
         passwordEditText = findViewById(R.id.logineditTextPassword);
@@ -105,17 +80,11 @@ public class LoginActivity extends AppCompatActivity {
         statusMessage.setText(message.trim());
     }
 
-    /**
-     * Navigate to the DashboardActivity
-     */
     protected void move2DashboardActivity(){
         Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
         startActivity(intent);
     }
 
-    /**
-     * initialize FirebaseCRUD (mockito purposes)
-     */
     public void setCrud(FirebaseCRUD mockFirebase) {
         crud = mockFirebase;
     }
