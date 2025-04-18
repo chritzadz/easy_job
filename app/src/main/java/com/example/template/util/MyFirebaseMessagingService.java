@@ -60,7 +60,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Create a notification that will be displayed in the notification tray.
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, "jobs")
-                        .setSmallIcon(R.drawable.ic_job_logo)
+                        .setSmallIcon(R.drawable.baseline_job_24)
                         .setContentTitle(title)
                         .setContentText(body)
                         .setPriority(NotificationCompat.PRIORITY_HIGH);

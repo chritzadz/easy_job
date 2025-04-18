@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.template.Firebase.FirebaseUseCase;
 import com.example.template.R;
 import com.example.template.controller.CredentialCheckUseCase;
+import com.example.template.model.CurrentUser;
+import com.example.template.model.User;
 import com.example.template.status.Status;
 import com.example.template.status.SuccessStatus;
 
@@ -50,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         if(status.equals(new SuccessStatus())){
             status = FirebaseUseCase.checkUserExist(email, password);
             if (status.equals(new SuccessStatus())){
+                CurrentUser.getInstance().setUser(FirebaseUseCase.findUserByEmail(email));
                 move2DashboardActivity();
             }
             else{

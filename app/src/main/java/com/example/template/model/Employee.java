@@ -8,9 +8,6 @@ package com.example.template.model;
  */
 
 public class Employee extends User{
-    private String jobFilter;
-    private String jobFilterCriteria;
-
     /**
      * Constructs a new Employee
      * @param email The email address of the employee
@@ -18,6 +15,6 @@ public class Employee extends User{
      */
     public Employee(String firstName, String lastName, String email, String password) {
         super(firstName, lastName, email, password);
-        super.role = new EmployeeRole();
+        super.role = "Employer";
     }
 }

@@ -43,6 +43,11 @@ public class FirebaseCRUD {
 
     private FirebaseCRUD(Context context) {
         this.database = FirebaseDatabase.getInstance(context.getString(R.string.firebase_ref));
+
+        this.userList = new ArrayList<>();
+        this.jobList = new ArrayList<>();
+        this.appList = new ArrayList<>();
+
         initializeDatabaseRef();
         initializeDatabaseRefListeners();
     }
