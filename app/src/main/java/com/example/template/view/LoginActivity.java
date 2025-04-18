@@ -2,25 +2,17 @@ package com.example.template.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.template.Firebase.FirebaseUseCase;
 import com.example.template.R;
 import com.example.template.controller.CredentialCheckUseCase;
-import com.example.template.factory.UserRoleFactory;
-import com.example.template.model.CurrentUser;
-import com.example.template.model.Employee;
-import com.example.template.Firebase.FirebaseCRUD;
-import com.example.template.model.User;
 import com.example.template.status.Status;
 import com.example.template.status.SuccessStatus;
-import com.example.template.status.UserNotExistStatus;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText emailEditText;
@@ -33,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        FirebaseUseCase.set(this);
 
         setContents();
         setEventListeners();
@@ -54,23 +48,17 @@ public class LoginActivity extends AppCompatActivity {
 
         Status status = CredentialCheckUseCase.validateSignUp(email, password);
         if(status.equals(new SuccessStatus())){
-            User user = findUser(email);
-            if (user != null){
-                CurrentUser.getInstance().setUser(user);
+            status = FirebaseUseCase.checkUserExist(email, password);
+            if (status.equals(new SuccessStatus())){
                 move2DashboardActivity();
             }
             else{
-                displayErrorMessage(new UserNotExistStatus());
+                displayErrorMessage(status);
             }
         }
         else{
             displayErrorMessage(status);
         }
-    }
-
-    private User findUser(String email) {
-        FirebaseUseCase fuc = new FirebaseUseCase(this);
-        return fuc.findUserByEmail(email);
     }
 
     private void setContents() {

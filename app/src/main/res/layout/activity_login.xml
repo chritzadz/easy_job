@@ -60,6 +60,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginBottom="38dp"
         android:maxWidth="400dp"
+        android:textColor="#FF0000"
         android:textAlignment="center"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/loginButton"
@@ -92,7 +93,7 @@
         android:layout_marginStart="101dp"
         android:layout_marginTop="11dp"
         android:layout_marginBottom="150dp"
-        android:text="Do not  have an account? "
+        android:text="Do not have an account? "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton" />

@@ -67,11 +67,14 @@ public class FirebaseCRUD {
         this.jobsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                jobList.clear();
-                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                    Job job = userSnapshot.getValue(Job.class);
-                    if (job != null) {
-                        jobList.add(job);
+                if(userList != null) {
+                    jobList.clear();
+
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        Job job = userSnapshot.getValue(Job.class);
+                        if (job != null) {
+                            jobList.add(job);
+                        }
                     }
                 }
             }
@@ -84,11 +87,14 @@ public class FirebaseCRUD {
         this.appsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                appList.clear();
-                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                    Application application = userSnapshot.getValue(Application.class);
-                    if (application != null) {
-                        appList.add(application);
+                if(appList != null){
+                    appList.clear();
+
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        Application application = userSnapshot.getValue(Application.class);
+                        if (application != null) {
+                            appList.add(application);
+                        }
                     }
                 }
             }
@@ -101,11 +107,14 @@ public class FirebaseCRUD {
         this.usersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userList.clear();
-                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                    User user = userSnapshot.getValue(User.class);
-                    if (user != null) {
-                        userList.add(user);
+                if(userList != null) {
+                    userList.clear();
+
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        User user = userSnapshot.getValue(User.class);
+                        if (user != null) {
+                            userList.add(user);
+                        }
                     }
                 }
             }

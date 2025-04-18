@@ -15,10 +15,7 @@
     import com.example.template.Firebase.FirebaseUseCase;
     import com.example.template.R;
     import com.example.template.controller.CredentialCheckUseCase;
-    import com.example.template.controller.CredentialValidator;
 
-
-    import com.example.template.Firebase.FirebaseCRUD;
     import com.example.template.factory.UserRoleFactory;
     import com.example.template.model.User;
     import com.example.template.status.Status;
@@ -49,6 +46,8 @@
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_register);
 
+            FirebaseUseCase.set(this);
+
             setContents();
             setEventListeners();
         }
@@ -77,7 +76,7 @@
         }
 
         public void addUser(User user){
-            new FirebaseUseCase(this).addUser(user);
+            FirebaseUseCase.addUser(user);
         }
 
         private void move2LogInActivity() {

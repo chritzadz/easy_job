@@ -5,6 +5,9 @@ import com.example.template.status.SuccessStatus;
 
 public class CredentialCheckUseCase {
     private static Status status = null;
+    private CredentialCheckUseCase() {
+        throw new IllegalStateException("Utility class");
+    }
     public static Status validateSignUp(String email, String password){
         //check email
         status = CredentialValidator.checkEmail(email);
