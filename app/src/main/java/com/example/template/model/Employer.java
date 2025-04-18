@@ -15,6 +15,6 @@ public class Employer extends User{
      */
     public Employer(String first, String last, String email, String password) {
         super(first, last, email, password);
-        super.role = "Employer";
+        super.role = new EmployeeRole();
     }
 }
