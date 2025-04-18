@@ -46,6 +46,14 @@
             android:name=".view.DashboardActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".view.ProfileActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".view.JobActivity"
+            android:exported="true" />
+
         <service
             android:name=".util.MyFirebaseMessagingService"
             android:exported="false">

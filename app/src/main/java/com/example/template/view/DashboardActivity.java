@@ -1,5 +1,6 @@
 package com.example.template.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -44,14 +45,16 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void showNavigation() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setPadding(0,0,0,0);
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.nav_settings) {
-                move2SettingsPage();
+                move2ProfilePage();
                 return true;
             } else if (item.getItemId() == R.id.nav_home) {
                 return true;
             } else if (item.getItemId() == R.id.nav_job) {
+                move2JobPage();
                 return true;
             }
             return false;
@@ -59,11 +62,12 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void move2JobPage() {
+        Intent intent = new Intent(this, JobActivity.class);
+        startActivity(intent);
     }
 
-    private void move2AllAppsPage() {
-    }
-
-    private void move2SettingsPage() {
+    private void move2ProfilePage() {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
     }
 }
