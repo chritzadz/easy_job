@@ -4,14 +4,17 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.template.Adapter.JobAdapter;
 import com.example.template.Firebase.FirebaseUseCase;
 import com.example.template.R;
 import com.example.template.model.CurrentUser;
@@ -19,11 +22,10 @@ import com.example.template.model.User;
 import com.example.template.util.LocationHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity implements JobAdapter.JobClickListener{
     private TextView welcomeLabel;
     private TextView locationLabel;
     private User currUser = CurrentUser.getInstance().getUser();
-
     private String currCity = "";
 
     @Override
@@ -46,6 +48,17 @@ public class DashboardActivity extends AppCompatActivity {
     private void setContents() {
         welcomeLabel = findViewById(R.id.welcomeTextViewDashboard);
         locationLabel = findViewById(R.id.locationTextViewDashboard);
+
+        RecyclerView resultView = findViewById(R.id.jobListRecyclerViewDashboard);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        resultView.setLayoutManager(manager);
+
+        DividerItemDecoration decoration = new DividerItemDecoration(resultView.getContext(), manager.getOrientation());
+        resultView.addItemDecoration(decoration);
+
+        JobAdapter adapter = new JobAdapter();
+        adapter.setJobClickListener(this);
+        resultView.setAdapter(adapter);
 
         updateWelcomeLabel();
         showNavigation();
@@ -120,5 +133,11 @@ public class DashboardActivity extends AppCompatActivity {
         new LocationHelper(this, (city, lat, lng)-> {
             locationLabel.setText(city);
         });
+    }
+
+    @Override
+    public void onJobClick(View view, int position) {
+        Intent intent = new Intent(this, DashboardActivity.class);
+        startActivity(intent);
     }
 }
