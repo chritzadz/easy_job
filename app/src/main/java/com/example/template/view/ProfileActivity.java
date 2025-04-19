@@ -1,5 +1,6 @@
 package com.example.template.view;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +21,7 @@ public class ProfileActivity extends AppCompatActivity implements SettingAdapter
     TextView nameLabel;
     TextView roleLabel;
 
-    private User currentUser = CurrentUser.getInstance().getUser();
+    private final User currentUser = CurrentUser.getInstance().getUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +30,6 @@ public class ProfileActivity extends AppCompatActivity implements SettingAdapter
         setContents();
     }
 
-    private void setEventListeners() {
-    }
 
     private void setContents() {
         nameLabel = findViewById(R.id.nameTextViewProfile);
@@ -80,8 +79,32 @@ public class ProfileActivity extends AppCompatActivity implements SettingAdapter
         startActivity(intent);
     }
 
+    private void move2LoginPage(){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onSettingFunctionClick(View view, int position) {
+        switch (position) {
+            case 0: //reset
+
+                break;
+            case 1: //switch
+
+                break;
+            case 2: //logout
+                new AlertDialog.Builder(this)
+                        .setTitle("Confirm Logout")
+                        .setMessage("Are you sure you want to log out?")
+                        .setPositiveButton("Yes", (dialog, which) -> move2LoginPage())
+                        .setNegativeButton("Cancel", null)
+                        .show();
+
+                break;
+            default:
+                break;
+        }
 
     }
 }
