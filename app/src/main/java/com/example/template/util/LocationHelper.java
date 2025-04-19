@@ -37,11 +37,6 @@ public class LocationHelper {
         void onCityUpdated(String cityName, double latitude, double longitude);
     }
 
-    /**
-     * Constructs a LocationHelper instance with a callback for city updates.
-     * @param context The context to access system services
-     * @param callback The callback class to notify city updates
-     */
     public LocationHelper(Context context, LocationCallback callback) {
         this.context = context;
         this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -78,9 +73,6 @@ public class LocationHelper {
         requestLocationUpdates();
     }
 
-    /**
-     * Check location permission and requests location updates from the LocationManager
-     */
     private void requestLocationUpdates() {
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -89,13 +81,5 @@ public class LocationHelper {
         } else {
             Log.e("LocationHelper", "location unauthorized permission");
         }
-    }
-
-    /**
-     * Returns the current city name.
-     * @return The name of the city of the system
-     */
-    public String getCity(){
-        return city;
     }
 }

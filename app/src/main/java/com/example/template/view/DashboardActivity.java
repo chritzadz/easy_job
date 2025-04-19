@@ -1,10 +1,14 @@
 package com.example.template.view;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -12,11 +16,15 @@ import com.example.template.Firebase.FirebaseUseCase;
 import com.example.template.R;
 import com.example.template.model.CurrentUser;
 import com.example.template.model.User;
+import com.example.template.util.LocationHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class DashboardActivity extends AppCompatActivity {
     private TextView welcomeLabel;
+    private TextView locationLabel;
     private User currUser = CurrentUser.getInstance().getUser();
+
+    private String currCity = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +33,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         FirebaseUseCase.set(this);
 
-        setContents();
-        setEventListeners();
+        requestLocationPermission();
     }
 
     private void setEventListeners() {
@@ -35,6 +42,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void setContents() {
         welcomeLabel = findViewById(R.id.welcomeTextViewDashboard);
+        locationLabel = findViewById(R.id.locationTextViewDashboard);
 
         showRolePage();
         updateWelcomeLabel();
@@ -68,6 +76,8 @@ public class DashboardActivity extends AppCompatActivity {
     private void updateWelcomeLabel() {
         String message = welcomeLabel.getText() + currUser.getFirstName();
         welcomeLabel.setText(message);
+
+        locationLabel.setText(currCity);
     }
 
     private void showNavigation() {
@@ -96,5 +106,21 @@ public class DashboardActivity extends AppCompatActivity {
     private void move2ProfilePage() {
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
+    }
+
+    public void requestLocationPermission(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    this,
+                    new String[]{ Manifest.permission.ACCESS_FINE_LOCATION },
+                    1001
+            );
+        }
+        new LocationHelper(this, (city, lat, lng)-> {
+            currCity = city;
+            setContents();
+            setEventListeners();
+        });
     }
 }
