@@ -109,7 +109,8 @@ public class ProfileActivity extends AppCompatActivity implements SettingAdapter
     }
 
     private void move2ProfileManagementPage() {
-
+        Intent intent = new Intent(this, ProfileManagementActivity.class);
+        startActivity(intent);
     }
 
     private void alertSwitch() {
@@ -125,8 +126,7 @@ public class ProfileActivity extends AppCompatActivity implements SettingAdapter
         String email = currentUser.getEmail();
 
         FirebaseUseCase.switchRole(email, () -> { //keren jg pakelambda
-            User updatedUser = FirebaseUseCase.findUserByEmail(email);
-            CurrentUser.getInstance().setUser(updatedUser);
+            currentUser.setRole(currentUser.getRole().equals("Employee")? "Employer":"Employee");
 
             Intent intent = new Intent(context, DashboardActivity.class);
             startActivity(intent);

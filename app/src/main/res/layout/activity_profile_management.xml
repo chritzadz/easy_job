@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,131 +7,162 @@
     android:layout_height="match_parent"
     tools:context=".view.DashboardActivity">
 
-    <ImageView
-        android:id="@+id/profilePictureImageViewProfileManagement"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:contentDescription="Profile Image"
-        android:src="@drawable/quick_cash" />
-
-    <ImageView
-        android:id="@+id/backButtonImageViewProfileManagement"
-        android:src="@drawable/baseline_arrow_back_24"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp" />
-
-    <TextView
-        android:id="@+id/firstNameLabelTextViewProfileManagement"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_below="@id/profilePictureImageViewProfileManagement"
-        android:text="First Name" />
-
-    <TextView
-        android:id="@+id/lastNameLabelTextViewProfileManagement"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_below="@id/firstNameLabelTextViewProfileManagement"
-        android:text="Last Name" />
-
-    <TextView
-        android:id="@+id/roleLabelTextViewProfileManagement"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_below="@id/lastNameLabelTextViewProfileManagement"
-        android:text="Role" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/firstNameTextInputProfileManagement"
+    <RelativeLayout
+        android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:boxBackgroundMode="none"
-        app:boxStrokeWidthFocused="0dp"
-        app:boxStrokeWidth="0dp"
-        app:hintEnabled="false"
-        android:padding="0dp"
-        android:layout_marginTop="30dp"
-        android:layout_toEndOf="@id/firstNameLabelTextViewProfileManagement"
-        android:layout_below="@id/profilePictureImageViewProfileManagement"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="20dp">
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent">
 
-    <com.google.android.material.textfield.TextInputEditText
+        <Button
+            android:id="@+id/saveButtonProfileManagement"
+            android:layout_width="200dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_height="match_parent"
+            android:text="Save"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="50dp"
+            android:textColor="#FFFFFF"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollViewProfileManagement"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@null"
-        android:padding="0dp"
-        android:textSize="16sp"
-        android:hint="Enter first name" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/lastNameTextInputProfileManagement"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:boxBackgroundMode="none"
-        app:boxStrokeWidthFocused="0dp"
-        app:boxStrokeWidth="0dp"
-        app:hintEnabled="false"
-        android:padding="0dp"
-        android:layout_marginTop="30dp"
-        android:layout_toEndOf="@id/firstNameLabelTextViewProfileManagement"
-        android:layout_below="@id/firstNameTextInputProfileManagement"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="20dp">
-
-        <com.google.android.material.textfield.TextInputEditText
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginBottom="100dp" >
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@null"
-            android:padding="0dp"
-            android:textSize="16sp"
-            android:hint="Enter last name" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_alignParentTop="true"
+                android:id="@+id/backButtonImageViewProfileManagement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="40dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="10dp"
+                android:src="@drawable/baseline_arrow_back_24" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/NroleTextInputProfileManagement"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:boxBackgroundMode="none"
-        android:inputType="none"
-        app:boxStrokeWidthFocused="0dp"
-        app:boxStrokeWidth="0dp"
-        app:hintEnabled="false"
-        android:padding="0dp"
-        android:layout_marginTop="30dp"
-        android:layout_toEndOf="@id/firstNameLabelTextViewProfileManagement"
-        android:layout_below="@id/lastNameTextInputProfileManagement"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="20dp">
+            <ImageView
+                android:id="@+id/profilePictureImageViewProfileManagement"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:contentDescription="Profile Image"
+                android:src="@drawable/quick_cash" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@null"
-            android:padding="0dp"
-            android:textSize="16sp"
-            android:hint="Enter last name" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/firstNameLabelTextViewProfileManagement"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="20sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/profilePictureImageViewProfileManagement"
+                android:text="First Name" />
 
+            <TextView
+                android:id="@+id/lastNameLabelTextViewProfileManagement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/firstNameLabelTextViewProfileManagement"
+                android:text="Last Name" />
 
+            <TextView
+                android:id="@+id/roleLabelTextViewProfileManagement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/lastNameLabelTextViewProfileManagement"
+                android:text="Role" />
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstNameTextInputLayoutProfileManagement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="none"
+                app:boxStrokeWidthFocused="0dp"
+                app:boxStrokeWidth="0dp"
+                app:hintEnabled="false"
+                android:padding="0dp"
+                android:layout_marginTop="30dp"
+                android:layout_toEndOf="@id/firstNameLabelTextViewProfileManagement"
+                android:layout_below="@id/profilePictureImageViewProfileManagement"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="20dp">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/firstNameTextInputProfileManagement"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:padding="0dp"
+                    android:textSize="16sp"
+                    android:hint="Enter first name" />
+            </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lastNameTextInputLayoutProfileManagement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="none"
+                app:boxStrokeWidthFocused="0dp"
+                app:boxStrokeWidth="0dp"
+                app:hintEnabled="false"
+                android:padding="0dp"
+                android:layout_marginTop="30dp"
+                android:layout_toEndOf="@id/firstNameLabelTextViewProfileManagement"
+                android:layout_below="@id/firstNameTextInputLayoutProfileManagement"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="20dp">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/lastNameTextInputProfileManagement"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:padding="0dp"
+                    android:textSize="16sp"
+                    android:hint="Enter last name" />
+            </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/roleTextInputLayoutProfileManagement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="none"
+                android:inputType="none"
+                app:boxStrokeWidthFocused="0dp"
+                app:boxStrokeWidth="0dp"
+                app:hintEnabled="false"
+                android:padding="0dp"
+                android:layout_marginTop="30dp"
+                android:layout_toEndOf="@id/firstNameLabelTextViewProfileManagement"
+                android:layout_below="@id/lastNameTextInputLayoutProfileManagement"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/roleTextInputProfileManagement"
+                    android:inputType="none"
+                    android:enabled="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:padding="0dp"
+                    android:textSize="16sp"
+                    android:hint="Enter last name" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

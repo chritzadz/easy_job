@@ -1,6 +1,9 @@
 package com.example.template.Firebase;
 
 import android.content.Context;
+import android.util.Log;
+
+import androidx.room.Query;
 
 import com.example.template.model.Application;
 import com.example.template.model.Job;
@@ -21,14 +24,15 @@ public class FirebaseUseCase {
     public FirebaseUseCase() { /* Nothing */ }
 
     public static void set(Context context){
+        Log.e("set Databse", "HELLO");
         database = FirebaseCRUD.getInstance(context);
         updateEntities();
     }
 
     private static void updateEntities() {
-        jobList = database.jobList;
-        appList = database.appList;
-        userList = database.userList;
+        jobList = FirebaseCRUD.jobList;
+        appList = FirebaseCRUD.appList;
+        userList = FirebaseCRUD.userList;
     }
 
     public void addJob(Job job){
@@ -49,7 +53,6 @@ public class FirebaseUseCase {
         }
         return null;
     }
-
     public static Status checkUserExist(String email, String password){
         User user = findUserByEmail(email);
         if (user != null){
@@ -62,12 +65,30 @@ public class FirebaseUseCase {
             return new UserNotExistStatus();
         }
     }
-
     public static void switchRole(String email, OnRoleSwitchComplete callback) {
         database.modifyUserRole(email, callback);
+        updateEntities();
+    }
+
+    public static void updateProfile(String email, String firstName, String lastName, OnProfileUpdateComplete callback) {
+        final int[] completed = {0};
+        OnProfileUpdateComplete internalCallback = () -> {
+            completed[0]++;
+            if (completed[0] == 2) { //here items is according to the number of changes
+                callback.onComplete();
+            }
+            updateEntities();
+        };
+
+        database.modifyUserFirstName(email, firstName, internalCallback);
+        database.modifyUserLastName(email, lastName, internalCallback);
     }
 
     public interface OnRoleSwitchComplete {
+        void onComplete();
+    }
+
+    public interface OnProfileUpdateComplete {
         void onComplete();
     }
 }

@@ -4,55 +4,39 @@ import android.content.Context;
 import android.util.Log;
 import androidx.annotation.NonNull;
 import com.example.template.R;
-import com.example.template.factory.UserRoleFactory;
 import com.example.template.model.Application;
 import com.example.template.model.User;
 import com.example.template.model.Job;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import java.util.Map;
-
 public class FirebaseCRUD {
-    public static final String[] JOB_CATEGORIES = {
-            "Gardening",
-            "Pet Care",
-            "Cleaning",
-            "Delivery",
-            "Tutoring"
-    };
-
     private final FirebaseDatabase database;
-    private DatabaseReference usersRef = null;
-    private DatabaseReference jobsRef = null;
-    private DatabaseReference appsRef = null;
-    public List<User> userList;
-    public List<Job> jobList;
-    public List<Application> appList;
+    private DatabaseReference usersRef;
+    private DatabaseReference jobsRef;
+    private DatabaseReference appsRef;
+    public static List<User> userList = new ArrayList<>();
+    public static List<Job> jobList = new ArrayList<>();
+    public static List<Application> appList = new ArrayList<>();
     private static FirebaseCRUD instance;
 
     private FirebaseCRUD(Context context) {
         this.database = FirebaseDatabase.getInstance(context.getString(R.string.firebase_ref));
 
-        this.userList = new ArrayList<>();
-        this.jobList = new ArrayList<>();
-        this.appList = new ArrayList<>();
-
+        Log.e("SET LITENER", "rye");
         initializeDatabaseRef();
-        initializeDatabaseRefListeners();
+
     }
 
     public static FirebaseCRUD getInstance(Context context) {
+        Log.e("GET INSTANCE", "");
         if (instance == null) {
             instance = new FirebaseCRUD(context);
         }
@@ -62,8 +46,11 @@ public class FirebaseCRUD {
         this.usersRef = this.database.getReference("users");
         this.jobsRef = this.database.getReference("jobs");
         this.appsRef = this.database.getReference("applications");
+        Log.e("SET LITENER", "nito function");
+        initializeDatabaseRefListeners();
     }
-    private void initializeDatabaseRefListeners() {
+    public void initializeDatabaseRefListeners() {
+        Log.e("SET LITENER", "set user listener");
         this.setUserListener();
         this.setJobListener();
         this.setApplicationListener();
@@ -109,12 +96,13 @@ public class FirebaseCRUD {
         });
     }
     protected void setUserListener() {
-        this.usersRef.addValueEventListener(new ValueEventListener() {
+        Log.e("here", userList.toString());
+        this.usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.e("in data change", "test");
                 if(userList != null) {
                     userList.clear();
-
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                         User user = userSnapshot.getValue(User.class);
                         if (user != null) {
@@ -125,8 +113,11 @@ public class FirebaseCRUD {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Error", String.valueOf(error));
+            }
         });
+
     }
     public void addUser(User user){
         String userId = usersRef.push().getKey();
@@ -175,8 +166,54 @@ public class FirebaseCRUD {
         });
     }
 
-    //callback interface for asynchrnous communication
-        public interface OnRoleSwitchComplete {
-            void onComplete();
-        }
+    public void modifyUserFirstName(String email, String newFirstName, FirebaseUseCase.OnProfileUpdateComplete callback){
+        Query query = usersRef.orderByChild("email").equalTo(email);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        String userId = userSnapshot.getKey();
+                        usersRef.child(userId).child("firstName").setValue(newFirstName).addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                callback.onComplete();
+                            }
+                        });
+                    }
+                } else {
+                    Log.d("FirebaseUpdate", "No user found with email: " + email);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseUpdate", "Error updating profile", error.toException());
+            }
+        });
+    }
+    public void modifyUserLastName(String email, String newLastName, FirebaseUseCase.OnProfileUpdateComplete callback){
+        Query query = usersRef.orderByChild("email").equalTo(email);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        String userId = userSnapshot.getKey();
+                        usersRef.child(userId).child("lastName").setValue(newLastName).addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                callback.onComplete();
+                            }
+                        });
+                    }
+                } else {
+                    Log.d("FirebaseUpdate", "No user found with email: " + email);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseUpdate", "Error updating profile", error.toException());
+            }
+        });
+    }
 }
