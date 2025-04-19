@@ -1,7 +1,6 @@
 /**
  *  File: ApplicationAdapter.java
  *  Author:
- *
  *  Description: This class implements an Adapter design pattern that allows
  *  to fetch application data from firebase realtime database to interact and shown
  *  in RecyclerView format.
@@ -18,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.template.R;
-import com.example.template.model.Application;
 
 import java.util.ArrayList;
 import java.util.Arrays;

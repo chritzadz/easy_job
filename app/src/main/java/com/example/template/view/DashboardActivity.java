@@ -16,7 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class DashboardActivity extends AppCompatActivity {
     private TextView welcomeLabel;
-    private final User currUser = CurrentUser.getInstance().getUser();
+    private User currUser = CurrentUser.getInstance().getUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

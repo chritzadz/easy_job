@@ -1,6 +1,7 @@
 package com.example.template.view;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.template.Adapter.SettingAdapter;
+import com.example.template.Firebase.FirebaseUseCase;
 import com.example.template.R;
 import com.example.template.model.CurrentUser;
 import com.example.template.model.User;
+import com.google.android.gms.maps.model.Dash;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.Firebase;
 
 public class ProfileActivity extends AppCompatActivity implements SettingAdapter.SettingFunctionClickListener {
     TextView nameLabel;
@@ -26,6 +30,8 @@ public class ProfileActivity extends AppCompatActivity implements SettingAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        FirebaseUseCase.set(this);
 
         setContents();
     }
@@ -91,20 +97,49 @@ public class ProfileActivity extends AppCompatActivity implements SettingAdapter
 
                 break;
             case 1: //switch
-
+                alertSwitch();
                 break;
             case 2: //logout
-                new AlertDialog.Builder(this)
-                        .setTitle("Confirm Logout")
-                        .setMessage("Are you sure you want to log out?")
-                        .setPositiveButton("Yes", (dialog, which) -> move2LoginPage())
-                        .setNegativeButton("Cancel", null)
-                        .show();
-
+                alertLogout();
                 break;
             default:
                 break;
         }
 
+    }
+
+    private void alertSwitch() {
+        new AlertDialog.Builder(this)
+                .setTitle("Confirm Switch?")
+                .setMessage("Are you sure you want to switch role?")
+                .setPositiveButton("Yes", (dialog, which) -> processRoleSwitch(this))
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void processRoleSwitch(Context context) {
+        String email = currentUser.getEmail();
+
+        FirebaseUseCase.switchRole(email, new FirebaseUseCase.OnRoleSwitchComplete() {
+            @Override
+            public void onComplete() {
+                User updatedUser = FirebaseUseCase.findUserByEmail(email);
+                CurrentUser.getInstance().setUser(updatedUser);
+
+                Intent intent = new Intent(context, DashboardActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+    }
+
+    public void alertLogout(){
+        new AlertDialog.Builder(this)
+                .setTitle("Confirm Logout")
+                .setMessage("Are you sure you want to log out?")
+                .setPositiveButton("Yes", (dialog, which) -> move2LoginPage())
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 }

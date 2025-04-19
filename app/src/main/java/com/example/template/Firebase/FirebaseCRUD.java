@@ -147,4 +147,36 @@ public class FirebaseCRUD {
             appsRef.child(appsId).setValue(application);
         }
     }
+
+    public void modifyUserRole(String email, FirebaseUseCase.OnRoleSwitchComplete callback){
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                    String userEmail = userSnapshot.child("email").getValue(String.class);
+
+                    if (userEmail != null && userEmail.equals(email)) {
+                        String oldRole = userSnapshot.child("role").getValue(String.class);
+                        assert oldRole != null;
+                        String newRole = oldRole.equals("Employee")? "Employer": "Employee";
+                        userSnapshot.getRef().child("role").setValue(newRole).addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                callback.onComplete();
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Firebase", "Error: " + error.getMessage());
+            }
+        });
+    }
+
+    //callback interface for asynchrnous communication
+        public interface OnRoleSwitchComplete {
+            void onComplete();
+        }
 }

@@ -18,7 +18,7 @@ public class FirebaseUseCase {
     private static List<Application> appList = null;
     private static List<User> userList = null;
 
-    public FirebaseUseCase() {}
+    public FirebaseUseCase() { /* Nothing */ }
 
     public static void set(Context context){
         database = FirebaseCRUD.getInstance(context);
@@ -61,5 +61,13 @@ public class FirebaseUseCase {
         else{
             return new UserNotExistStatus();
         }
+    }
+
+    public static void switchRole(String email, OnRoleSwitchComplete callback) {
+        database.modifyUserRole(email, callback);
+    }
+
+    public interface OnRoleSwitchComplete {
+        void onComplete();
     }
 }
