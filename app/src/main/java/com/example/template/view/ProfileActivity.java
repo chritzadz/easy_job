@@ -94,7 +94,7 @@ public class ProfileActivity extends AppCompatActivity implements SettingAdapter
     public void onSettingFunctionClick(View view, int position) {
         switch (position) {
             case 0: //reset
-
+                move2ProfileManagementPage();
                 break;
             case 1: //switch
                 alertSwitch();
@@ -105,6 +105,10 @@ public class ProfileActivity extends AppCompatActivity implements SettingAdapter
             default:
                 break;
         }
+
+    }
+
+    private void move2ProfileManagementPage() {
 
     }
 
@@ -120,18 +124,13 @@ public class ProfileActivity extends AppCompatActivity implements SettingAdapter
     private void processRoleSwitch(Context context) {
         String email = currentUser.getEmail();
 
-        FirebaseUseCase.switchRole(email, new FirebaseUseCase.OnRoleSwitchComplete() {
-            @Override
-            public void onComplete() {
-                User updatedUser = FirebaseUseCase.findUserByEmail(email);
-                CurrentUser.getInstance().setUser(updatedUser);
+        FirebaseUseCase.switchRole(email, () -> { //keren jg pakelambda
+            User updatedUser = FirebaseUseCase.findUserByEmail(email);
+            CurrentUser.getInstance().setUser(updatedUser);
 
-                Intent intent = new Intent(context, DashboardActivity.class);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(context, DashboardActivity.class);
+            startActivity(intent);
         });
-
-
     }
 
     public void alertLogout(){
