@@ -58,6 +58,10 @@
             android:name=".view.ProfileManagementActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".view.ManageJobListingActivity"
+            android:exported="true" />
+
         <service
             android:name=".util.MyFirebaseMessagingService"
             android:exported="false">

@@ -17,9 +17,7 @@ import com.example.template.Firebase.FirebaseUseCase;
 import com.example.template.R;
 import com.example.template.model.CurrentUser;
 import com.example.template.model.User;
-import com.google.android.gms.maps.model.Dash;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.Firebase;
 
 public class ProfileActivity extends AppCompatActivity implements SettingAdapter.SettingFunctionClickListener {
     TextView nameLabel;
@@ -99,13 +97,20 @@ public class ProfileActivity extends AppCompatActivity implements SettingAdapter
             case 1: //switch
                 alertSwitch();
                 break;
-            case 2: //logout
-                alertLogout();
+            case 2: //manage your job listing
+                move2ManageJobListingPage();
                 break;
+            case 3: //logout
+                alertLogout();
             default:
                 break;
         }
 
+    }
+
+    private void move2ManageJobListingPage() {
+        Intent intent = new Intent(this, ManageJobListingActivity.class);
+        startActivity(intent);
     }
 
     private void move2ProfileManagementPage() {

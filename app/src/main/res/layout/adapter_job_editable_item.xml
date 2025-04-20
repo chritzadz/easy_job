@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="7dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/purple_container">
+
+    <ImageView
+        android:id="@+id/companyIconAdapterJobEditableItem"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/baseline_add_location_24"
+        />
+
+    <TextView
+        android:textColor="@color/white"
+        android:id="@+id/jobNameAdapterJobEditableItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Software Engineering"
+        android:textSize="18sp"
+        android:layout_toEndOf="@id/companyIconAdapterJobEditableItem"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:textColor="@color/white"
+        android:id="@+id/jobLocationAdapterJobEditableItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Halifax"
+        android:layout_toEndOf="@id/companyIconAdapterJobEditableItem"
+        android:layout_below="@+id/jobNameAdapterJobEditableItem"
+        android:layout_marginStart="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@id/companyIconAdapterJobEditableItem"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp">
+
+        <TextView
+            android:id="@+id/timeLabelAdapterJobEditableItem"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_weight="0.5"
+            android:textSize="14sp"
+            android:layout_marginEnd="7dp"
+            android:text="2 hours"
+            android:textColor="@color/white"
+            android:background="@drawable/purple_tint_container"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/priceLabelAdapterJobEditableItem"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_weight="0.5"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="7dp"
+            android:textSize="14sp"
+            android:text="$10"
+            android:textColor="@color/white"
+            android:background="@drawable/purple_tint_container"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/editTextViewAdapterJobEditableItem"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_weight="0.2"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="7dp"
+            android:textSize="14sp"
+            android:text="+"
+            android:textColor="@color/white"
+            android:background="@drawable/purple_tint_container"
+            android:gravity="center"/>
+    </LinearLayout>
+
+</RelativeLayout>

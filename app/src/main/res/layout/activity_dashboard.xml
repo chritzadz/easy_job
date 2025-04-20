@@ -8,7 +8,7 @@
     tools:context=".view.DashboardActivity">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+        android:id="@+id/nestedScrollViewDashboard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -17,8 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <!-- HEADER (scrolls with content) -->
 
             <RelativeLayout
                 android:id="@+id/headerMessageDashboard"

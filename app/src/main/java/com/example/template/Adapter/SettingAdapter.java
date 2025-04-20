@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.SettingFunctionViewHolder> {
-    private final List<String> settingList = new ArrayList<>(Arrays.asList("Edit profile", "Switch role", "Logout"));
+    private final List<String> settingList = new ArrayList<>(Arrays.asList("Edit profile", "Switch role", "Your listing", "Logout"));
     private SettingFunctionClickListener listener;
 
     @NonNull
