@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 public class Job implements Serializable {
     private String jobDesc = "";
-    private String jobName = "";
+    private String jobTitle = "";
     private String jobLocation = "";
     private String jobCategory = "";
     private String jobEmail = "";
@@ -36,7 +36,7 @@ public class Job implements Serializable {
     public Job(String jobName, String jobDesc, String jobLocation, String category,
                String jobEmail, String jobPay, String jobHours, String jobKey, String jobStatus) {
         this.jobDesc = jobDesc;
-        this.jobName = jobName;
+        this.jobTitle = jobName;
         this.jobLocation = jobLocation;
         this.jobCategory = category;
         this.jobEmail = jobEmail;
@@ -59,15 +59,15 @@ public class Job implements Serializable {
     /**
      * @return The job name
      */
-    public String getJobName() {
-        return jobName;
+    public String getJobTitle() {
+        return jobTitle;
     }
 
     /**
      * @param jobName The job name
      */
     public void setJobName(String jobName) {
-        this.jobName = jobName;
+        this.jobTitle = jobName;
     }
 
     /**

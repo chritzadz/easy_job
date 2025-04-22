@@ -128,7 +128,7 @@ public class JobEditableAdapter extends RecyclerView.Adapter<JobEditableAdapter.
     @Override
     public void onBindViewHolder(@NonNull JobEditableViewHolder holder, int position) {
         Job job = jobs.get(position);
-        holder.jobName.setText(job.getJobName());
+        holder.jobName.setText(job.getJobTitle());
         holder.jobPay.setText("$"+job.getJobPay());
         holder.jobLocation.setText(job.getJobLocation());
         holder.jobTime.setText(job.getJobHours()+" hrs");

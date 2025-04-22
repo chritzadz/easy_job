@@ -12,7 +12,7 @@
     <string name="NO_ACCOUNT">Please make an account</string>
     <string name="FIREBASE_ERROR">"firebase error"</string>
     <string name="CREDENTIALS_FILE_PATH">"key.json"</string>
-    <string-array name="job_categories">
+    <string-array name="JOB_CATEGORIES">
         <item>Gardening</item>
         <item>Pet Care</item>
         <item>Cleaning</item>
