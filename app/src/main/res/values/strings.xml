@@ -24,6 +24,7 @@
     <string name="DECLINE_STATUS">"Decline"</string>
     <string name="COMPLETED_STATUS">"Complete"</string>
     <string name="PAID_STATUS">"Paid"</string>
+    <string name="PENDING_STATUS">"Pending"</string>
 
 
 </resources>

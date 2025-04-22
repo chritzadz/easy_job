@@ -35,7 +35,7 @@ public class FirebaseUseCase {
         userList = FirebaseCRUD.userList;
     }
 
-    public void addJob(Job job){
+    public static void addJob(Job job){
         database.addJob(job);
     }
     public void addApplication(Application application){

@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -15,9 +16,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.template.Firebase.FirebaseUseCase;
 import com.example.template.R;
+import com.example.template.model.CurrentUser;
+import com.example.template.model.Job;
+import com.example.template.model.User;
+import com.google.firebase.Firebase;
 
 public class AddJobActivity extends AppCompatActivity {
     ImageView backButton;
+    Button addJobButton;
     EditText jobTitleInput;
     Spinner jobCategoryInput;
     EditText jobPayInput;
@@ -25,6 +31,7 @@ public class AddJobActivity extends AppCompatActivity {
     EditText jobDescription;
     EditText jobLocation;
     EditText jobTotalPay;
+    User currUser = CurrentUser.getInstance().getUser();
 
 
     @Override
@@ -41,7 +48,7 @@ public class AddJobActivity extends AppCompatActivity {
 
     private void setEventListeners() {
         backButton.setOnClickListener(v -> move2ManageJobListingPage());
-
+        addJobButton.setOnClickListener(v -> addJob2Database());
         jobPayInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -68,6 +75,21 @@ public class AddJobActivity extends AppCompatActivity {
         });
     }
 
+    private void addJob2Database() {
+        Job newJob = new Job(String.valueOf(jobTitleInput.getText()),
+                String.valueOf(jobDescription.getText()),
+                String.valueOf(jobLocation.getText()),
+                jobCategoryInput.getSelectedItem().toString(),
+                currUser.getEmail(), String.valueOf(jobPayInput.getText()),
+                String.valueOf(jobHoursInput.getText()),
+                null,
+                String.valueOf(R.string.PENDING_STATUS));
+        FirebaseUseCase.addJob(newJob);
+
+        //can use callback to handlee aysnchrnously but for now its fine
+        move2ManageJobListingPage();
+    }
+
     private void move2ManageJobListingPage() {
         Intent intent = new Intent(this, ManageJobListingActivity.class);
         startActivity(intent);
@@ -82,6 +104,7 @@ public class AddJobActivity extends AppCompatActivity {
     }
 
     private void setContents() {
+        addJobButton = findViewById(R.id.addButtonAddJob);
         backButton = findViewById(R.id.backButtonImageViewAddJob);
         jobTitleInput = findViewById(R.id.jobTitleEditTextAddJob);
         jobCategoryInput = findViewById(R.id.jobCategorySpinnerAddJob);
@@ -90,5 +113,14 @@ public class AddJobActivity extends AppCompatActivity {
         jobLocation = findViewById(R.id.jobLocationEditTextAddJob);
         jobDescription = findViewById(R.id.jobDescriptionEditTextAddJob);
         jobTotalPay = findViewById(R.id.jobPayTotalEditTextAddJob);
+
+        initSpinner();
+    }
+
+    private void initSpinner() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.JOB_CATEGORIES, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        jobCategoryInput.setAdapter(adapter);
     }
 }

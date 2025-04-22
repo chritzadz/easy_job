@@ -233,7 +233,7 @@
         android:background="@android:color/transparent">
 
         <Button
-            android:id="@+id/addButtonManageJobListing"
+            android:id="@+id/addButtonAddJob"
             android:layout_width="200dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
