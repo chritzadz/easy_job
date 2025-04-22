@@ -2,8 +2,10 @@ package com.example.template.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -17,6 +19,7 @@ import com.example.template.R;
 
 public class ManageJobListingActivity extends AppCompatActivity implements JobEditableAdapter.JobEditableClickListener {
     Button addJobButton;
+    ImageView backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,13 @@ public class ManageJobListingActivity extends AppCompatActivity implements JobEd
 
     private void setEventListeners() {
         addJobButton.setOnClickListener(v -> move2AddJobPage());
+        backButton.setOnClickListener(v -> move2ProfilePage());
+    }
+
+    private void move2ProfilePage() {
+        Log.d("CLICK", "BACK BUTTON");
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
     }
 
     private void move2AddJobPage() {
@@ -41,6 +51,7 @@ public class ManageJobListingActivity extends AppCompatActivity implements JobEd
 
     private void setContents() {
         addJobButton = findViewById(R.id.addButtonManageJobListing);
+        backButton = findViewById(R.id.backButtonImageViewManageJobListing);
 
         RecyclerView resultView = findViewById(R.id.jobListRecyclerViewManageJobListing);
         LinearLayoutManager manager = new LinearLayoutManager(this);
