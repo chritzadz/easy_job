@@ -58,37 +58,13 @@ public class DashboardActivity extends AppCompatActivity implements JobAdapter.J
         DividerItemDecoration decoration = new DividerItemDecoration(resultView.getContext(), manager.getOrientation());
         resultView.addItemDecoration(decoration);
 
-        JobAdapter adapter = new JobAdapter();
+        JobAdapter adapter = new JobAdapter(FirebaseUseCase.getJobsFromOthers(currUser.getEmail()));
         adapter.setJobClickListener(this);
         resultView.setAdapter(adapter);
 
         updateWelcomeLabel();
         showNavigation();
     }
-
-//    private void showRolePage() {
-//        if(currUser.getRole().equals("Employer")) {
-//            showEmployerPage();
-//        } else if (currUser.getRole().equals("Employee")) {
-//            showEmployeePage();
-//        }
-//    }
-
-//    private void showEmployerPage() {
-//        FragmentManager manager = getSupportFragmentManager();
-//        FragmentTransaction transaction = manager.beginTransaction();
-//        EmployerDashboardFragment employerFragment = new EmployerDashboardFragment();
-//        transaction.replace(R.id.fragmentFragmentContainerDashboard, employerFragment);
-//        transaction.commit();
-//    }
-//
-//    private void showEmployeePage() {
-//        FragmentManager manager = getSupportFragmentManager();
-//        FragmentTransaction transaction = manager.beginTransaction();
-//        EmployeeDashboardFragment employeeFragment = new EmployeeDashboardFragment();
-//        transaction.replace(R.id.fragmentFragmentContainerDashboard, employeeFragment);
-//        transaction.commit();
-//    }
 
     private void updateWelcomeLabel() {
         String message = welcomeLabel.getText() + currUser.getFirstName();

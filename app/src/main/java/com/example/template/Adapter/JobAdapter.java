@@ -25,98 +25,12 @@ import java.util.List;
 import java.util.UUID;
 
 public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
-    private final List<Job> jobs = Arrays.asList(
-            new Job(
-                    "Barista",
-                    "Prepare and serve coffee and tea beverages.",
-                    "Jakarta",
-                    "Food & Beverage",
-                    "cafe@example.com",
-                    "25",
-                    "3",
-                    UUID.randomUUID().toString(),
-                    "pending"
-            ),
-            new Job(
-                    "Retail Assistant",
-                    "Help customers and manage stock in store.",
-                    "Bandung",
-                    "Retail",
-                    "store@example.com",
-                    "5",
-                    "5",
-                    UUID.randomUUID().toString(),
-                    "pending"
-            ),
-            new Job(
-                    "Delivery Helper",
-                    "Assist driver with parcel delivery.",
-                    "Surabaya",
-                    "Logistics",
-                    "delivery@example.com",
-                    "5",
-                    "5",
-                    UUID.randomUUID().toString(),
-                    "pending"
-            ),
-            new Job(
-                    "Event Crew",
-                    "Support staff for event setup and guest handling.",
-                    "Yogyakarta",
-                    "Events",
-                    "event@example.com",
-                    "50",
-                    "10",
-                    UUID.randomUUID().toString(),
-                    "pending"
-            ),
-            new Job(
-                    "Library Assistant",
-                    "Organize books and help visitors with queries.",
-                    "Depok",
-                    "Education",
-                    "library@example.com",
-                    "60",
-                    "3",
-                    UUID.randomUUID().toString(),
-                    "pending"
-            ),
-            new Job(
-                    "Library Assistant",
-                    "Organize books and help visitors with queries.",
-                    "Depok",
-                    "Education",
-                    "library@example.com",
-                    "60",
-                    "3",
-                    UUID.randomUUID().toString(),
-                    "pending"
-            ),
-            new Job(
-                    "Library Assistant",
-                    "Organize books and help visitors with queries.",
-                    "Depok",
-                    "Education",
-                    "library@example.com",
-                    "60",
-                    "3",
-                    UUID.randomUUID().toString(),
-                    "pending"
-            ),
-            new Job(
-                    "Library Assistant",
-                    "Organize books and help visitors with queries.",
-                    "Depok",
-                    "Education",
-                    "library@example.com",
-                    "60",
-                    "3",
-                    UUID.randomUUID().toString(),
-                    "pending"
-            )
-    );
-
+    private List<Job> jobs;
     private JobClickListener listener;
+
+    public JobAdapter(List<Job> jobs){
+        this.jobs = jobs;
+    }
 
     @NonNull
     @Override

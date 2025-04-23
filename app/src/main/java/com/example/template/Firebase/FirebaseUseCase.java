@@ -13,6 +13,7 @@ import com.example.template.status.SuccessStatus;
 import com.example.template.status.UserNotExistStatus;
 import com.example.template.status.UserPasswordMismatchStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FirebaseUseCase {
@@ -87,6 +88,28 @@ public class FirebaseUseCase {
     public static List<Job> getJobs(){
         updateEntities();
         return jobList;
+    }
+
+    public static List<Job> getJobsFromOthers(String currUserEmail){
+        updateEntities();
+        ArrayList<Job> tempList = new ArrayList<>();
+        for(Job j: jobList){
+            if (!j.getJobEmail().equals(currUserEmail)){
+                tempList.add(j);
+            }
+        }
+        return tempList;
+    }
+
+    public static List<Job> getJobsFromSelf(String currUserEmail){
+        updateEntities();
+        ArrayList<Job> tempList = new ArrayList<>();
+        for(Job j: jobList){
+            if (j.getJobEmail().equals(currUserEmail)){
+                tempList.add(j);
+            }
+        }
+        return tempList;
     }
 
     public interface OnRoleSwitchComplete {

@@ -16,10 +16,13 @@ import com.example.template.Adapter.JobAdapter;
 import com.example.template.Adapter.JobEditableAdapter;
 import com.example.template.Firebase.FirebaseUseCase;
 import com.example.template.R;
+import com.example.template.model.CurrentUser;
+import com.example.template.model.User;
 
 public class ManageJobListingActivity extends AppCompatActivity implements JobEditableAdapter.JobEditableClickListener {
     Button addJobButton;
     ImageView backButton;
+    User currUser = CurrentUser.getInstance().getUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,7 @@ public class ManageJobListingActivity extends AppCompatActivity implements JobEd
         DividerItemDecoration decoration = new DividerItemDecoration(resultView.getContext(), manager.getOrientation());
         resultView.addItemDecoration(decoration);
 
-        JobEditableAdapter adapter = new JobEditableAdapter(FirebaseUseCase.getJobs());
+        JobEditableAdapter adapter = new JobEditableAdapter(FirebaseUseCase.getJobsFromSelf(currUser.getEmail()));
         adapter.setJobEditableClickListener(this);
         resultView.setAdapter(adapter);
     }
