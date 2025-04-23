@@ -84,6 +84,11 @@ public class FirebaseUseCase {
         database.modifyUserLastName(email, lastName, internalCallback);
     }
 
+    public static List<Job> getJobs(){
+        updateEntities();
+        return jobList;
+    }
+
     public interface OnRoleSwitchComplete {
         void onComplete();
     }

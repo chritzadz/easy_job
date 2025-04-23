@@ -60,7 +60,7 @@ public class ManageJobListingActivity extends AppCompatActivity implements JobEd
         DividerItemDecoration decoration = new DividerItemDecoration(resultView.getContext(), manager.getOrientation());
         resultView.addItemDecoration(decoration);
 
-        JobEditableAdapter adapter = new JobEditableAdapter();
+        JobEditableAdapter adapter = new JobEditableAdapter(FirebaseUseCase.getJobs());
         adapter.setJobEditableClickListener(this);
         resultView.setAdapter(adapter);
     }
