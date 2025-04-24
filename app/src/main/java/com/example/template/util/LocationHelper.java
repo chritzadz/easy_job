@@ -82,4 +82,19 @@ public class LocationHelper {
             Log.e("LocationHelper", "location unauthorized permission");
         }
     }
+
+    public static LatLng getLatLngFromCity(String cityName, Context context) {
+        Geocoder geocoder = new Geocoder(context);
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(cityName, 1);
+            if (!addresses.isEmpty()) {
+                double latitude = addresses.get(0).getLatitude();
+                double longitude = addresses.get(0).getLongitude();
+                return new LatLng(latitude, longitude);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

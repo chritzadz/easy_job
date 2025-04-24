@@ -66,6 +66,10 @@
             android:name=".view.AddJobActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".view.JobDetailsActivity"
+            android:exported="true" />
+
         <service
             android:name=".util.MyFirebaseMessagingService"
             android:exported="false">

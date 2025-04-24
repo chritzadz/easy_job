@@ -18,9 +18,12 @@ import com.example.template.Adapter.JobAdapter;
 import com.example.template.Firebase.FirebaseUseCase;
 import com.example.template.R;
 import com.example.template.model.CurrentUser;
+import com.example.template.model.Job;
 import com.example.template.model.User;
 import com.example.template.util.LocationHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.List;
 
 public class DashboardActivity extends AppCompatActivity implements JobAdapter.JobClickListener{
     private TextView welcomeLabel;
@@ -108,14 +111,16 @@ public class DashboardActivity extends AppCompatActivity implements JobAdapter.J
                     1001
             );
         }
-        new LocationHelper(this, (city, lat, lng)-> {
-            locationLabel.setText(city);
-        });
+        new LocationHelper(this, (city, lat, lng)-> locationLabel.setText(city));
     }
 
     @Override
     public void onJobClick(View view, int position) {
-        Intent intent = new Intent(this, DashboardActivity.class);
+        Intent intent = new Intent(this, JobDetailsActivity.class);
+
+        List<Job> jobList = FirebaseUseCase.getJobsFromOthers(currUser.getEmail());
+
+        intent.putExtra("clickedJob", jobList.get(position));
         startActivity(intent);
     }
 }

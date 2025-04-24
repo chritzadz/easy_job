@@ -105,7 +105,6 @@ public class ProfileActivity extends AppCompatActivity implements SettingAdapter
             default:
                 break;
         }
-
     }
 
     private void move2ManageJobListingPage() {
