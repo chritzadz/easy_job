@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.ManageJobListingActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollViewManageJobListing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_alignParentTop="true"
+                    android:id="@+id/backButtonImageViewEditJob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="40dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="10dp"
+                    android:src="@drawable/baseline_arrow_back_24" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/editJobFormLayoutEditJob">
+
+                <TextView
+                    android:id="@+id/editJobFormLabelTextViewEditJob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:text="Edit Form"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    />
+
+                <TextView
+                    android:id="@+id/jobTitleLabelTextViewEditJob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@+id/editJobFormLabelTextViewEditJob"
+                    android:layout_marginStart="15dp"
+                    android:text="Title"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    />
+
+                <EditText
+                    android:id="@+id/jobTitleEditTextEditJob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_below="@id/jobTitleLabelTextViewEditJob"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:inputType="text"
+                    android:hint="Enter job title" />
+
+                <TextView
+                    android:id="@+id/jobCategoryLabelTextViewEditJob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@id/jobTitleEditTextEditJob"
+                    android:layout_marginStart="15dp"
+                    android:text="Category"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    />
+
+                <Spinner
+                    android:id="@+id/jobCategorySpinnerEditJob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_below="@id/jobCategoryLabelTextViewEditJob"/>
+
+                <TextView
+                    android:id="@+id/jobSalaryLabelTextViewEditJob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@id/jobCategorySpinnerEditJob"
+                    android:layout_marginStart="15dp"
+                    android:text="Salary"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/jobSalaryLinearLayoutEditJob"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/jobSalaryLabelTextViewEditJob"
+                    android:layout_marginEnd="15dp"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="15dp">
+                    <EditText
+                        android:id="@+id/jobPayEditTextEditJob"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="10"
+                        android:layout_weight="1.5"
+                        android:inputType="number" />
+                    <TextView
+                        android:id="@+id/jobPayTextViewEditJob"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:padding="0dp"
+                        android:layout_weight="0.2"
+                        android:text="x"
+                        android:textSize="20sp"/>
+
+                    <EditText
+                        android:id="@+id/jobHoursEditTextEditJob"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="5"
+                        android:layout_weight="1.5"
+                        android:inputType="number" />
+
+                    <TextView
+                        android:id="@+id/jobHoursTextViewEditJob"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:padding="0dp"
+                        android:layout_weight="0.7"
+                        android:text="hrs"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:focusable="false"
+                        android:clickable="false"/>
+
+                    <EditText
+                        android:id="@+id/jobPayTotalEditTextEditJob"
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:focusable="false"
+                        android:hint="50"
+                        android:clickable="false"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/jobDescriptionLabelTextViewEditJob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@id/jobSalaryLinearLayoutEditJob"
+                    android:layout_marginStart="15dp"
+                    android:text="Description"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    />
+
+                <EditText
+                    android:id="@+id/jobDescriptionEditTextEditJob"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:layout_below="@id/jobDescriptionLabelTextViewEditJob"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:hint="Description of the job"
+                    android:inputType="textMultiLine" />
+
+                <TextView
+                    android:id="@+id/jobLocationLabelTextViewEditJob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="15dp"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_below="@+id/jobDescriptionEditTextEditJob"
+                    android:text="Location"
+                    />
+
+                <EditText
+                    android:id="@+id/jobLocationEditTextEditJob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_below="@id/jobLocationLabelTextViewEditJob"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:inputType="text"
+                    android:hint="e.g. Indonesia" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <RelativeLayout
+        android:id="@+id/bottomLayoutManageJobListing"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom"
+        android:background="@android:color/transparent">
+
+        <Button
+            android:id="@+id/updateButtonEditJob"
+            android:layout_width="200dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_height="match_parent"
+            android:text="Add"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="50dp"
+            android:textColor="#FFFFFF"/>
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

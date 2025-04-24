@@ -32,7 +32,6 @@ public class JobDetailsActivity extends AppCompatActivity implements OnMapReadyC
     TextView jobLocation;
     ImageView backButton;
     MapView googleMap;
-    Bundle mapViewBundle = null;
     Job job = null;
     private GoogleMap mMap;
 

@@ -76,7 +76,8 @@ public class AddJobActivity extends AppCompatActivity {
     }
 
     private void addJob2Database() {
-        Job newJob = new Job(String.valueOf(jobTitleInput.getText()),
+        Job newJob = new Job(
+                String.valueOf(jobTitleInput.getText()),
                 String.valueOf(jobDescription.getText()),
                 String.valueOf(jobLocation.getText()),
                 jobCategoryInput.getSelectedItem().toString(),

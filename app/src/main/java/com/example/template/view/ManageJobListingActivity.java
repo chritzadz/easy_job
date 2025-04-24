@@ -17,7 +17,10 @@ import com.example.template.Adapter.JobEditableAdapter;
 import com.example.template.Firebase.FirebaseUseCase;
 import com.example.template.R;
 import com.example.template.model.CurrentUser;
+import com.example.template.model.Job;
 import com.example.template.model.User;
+
+import java.util.List;
 
 public class ManageJobListingActivity extends AppCompatActivity implements JobEditableAdapter.JobEditableClickListener {
     Button addJobButton;
@@ -70,6 +73,10 @@ public class ManageJobListingActivity extends AppCompatActivity implements JobEd
 
     @Override
     public void onJobEditableClick(View view, int position) {
-        //go to edit job
+        Intent intent = new Intent(this, EditJobActivity.class); //have not change this
+        List<Job> jobList = FirebaseUseCase.getJobsFromSelf(currUser.getEmail());
+        intent.putExtra("jobClicked", jobList.get(position));
+
+        startActivity(intent);
     }
 }

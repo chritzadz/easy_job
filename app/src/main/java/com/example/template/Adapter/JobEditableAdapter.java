@@ -8,6 +8,8 @@
 
 package com.example.template.Adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.template.R;
 import com.example.template.model.Job;
+import com.example.template.view.JobDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,9 +50,9 @@ public class JobEditableAdapter extends RecyclerView.Adapter<JobEditableAdapter.
         holder.jobLocation.setText(job.getJobLocation());
         holder.jobTime.setText(job.getJobHours()+" hrs");
 
-        holder.itemView.setOnClickListener(view -> {
+        holder.editButton.setOnClickListener(v ->{
             if (listener != null) {
-                listener.onJobEditableClick(view, position);
+                listener.onJobEditableClick(v, position);
             }
         });
     }
@@ -72,12 +75,15 @@ public class JobEditableAdapter extends RecyclerView.Adapter<JobEditableAdapter.
         TextView jobLocation;
         TextView jobPay;
         TextView jobTime;
+        TextView editButton;
+
         public JobEditableViewHolder(View itemView) {
             super(itemView);
             jobName = itemView.findViewById(R.id.jobNameAdapterJobEditableItem);
             jobLocation = itemView.findViewById(R.id.jobLocationAdapterJobEditableItem);
             jobPay = itemView.findViewById(R.id.priceLabelAdapterJobEditableItem);
             jobTime = itemView.findViewById(R.id.timeLabelAdapterJobEditableItem);
+            editButton = itemView.findViewById(R.id.editTextViewAdapterJobEditableItem);
         }
     }
 }

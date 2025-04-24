@@ -39,6 +39,7 @@ public class FirebaseUseCase {
     public static void addJob(Job job){
         database.addJob(job);
     }
+
     public void addApplication(Application application){
         database.addApplication(application);
     }
@@ -112,11 +113,33 @@ public class FirebaseUseCase {
         return tempList;
     }
 
+    public static void updateJob(String jobKey, String jobTitle, String jobDesc, String jobLocation, String jobCategory, String jobHours, String jobPay, OnJobUpdateComplete callback) {
+        final int[] completed = {0};
+        OnProfileUpdateComplete internalCallback = () -> {
+            completed[0]++;
+            if (completed[0] == 6) {
+                callback.onComplete();
+            }
+            updateEntities();
+        };
+
+        database.modifyJobTitle(jobKey, jobTitle, internalCallback);
+        database.modifyJobDesc(jobKey, jobDesc, internalCallback);
+        database.modifyJobLocation(jobKey, jobLocation, internalCallback);
+        database.modifyJobCategory(jobKey, jobCategory, internalCallback);
+        database.modifyJobHours(jobKey, jobHours, internalCallback);
+        database.modifyJobPay(jobKey, jobPay, internalCallback);
+    }
+
     public interface OnRoleSwitchComplete {
         void onComplete();
     }
 
     public interface OnProfileUpdateComplete {
+        void onComplete();
+    }
+
+    public interface OnJobUpdateComplete {
         void onComplete();
     }
 }

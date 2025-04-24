@@ -187,7 +187,7 @@ public class FirebaseCRUD {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FirebaseUpdate", "Error updating profile", error.toException());
+                Log.e("FirebaseUpdate", "Error updating first name", error.toException());
             }
         });
     }
@@ -212,7 +212,163 @@ public class FirebaseCRUD {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FirebaseUpdate", "Error updating profile", error.toException());
+                Log.e("FirebaseUpdate", "Error updating last name", error.toException());
+            }
+        });
+    }
+
+    public void modifyJobTitle(String jobKey, String jobTitle, FirebaseUseCase.OnProfileUpdateComplete callback) {
+        Query query = jobsRef.orderByChild("jobKey").equalTo(jobKey);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        String jobID = userSnapshot.getKey();
+                        jobsRef.child(jobID).child("jobTitle").setValue(jobTitle).addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                callback.onComplete();
+                            }
+                        });
+                    }
+                } else {
+                    Log.d("FirebaseUpdate", "No user found with email: " + jobTitle);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseUpdate", "Error updating job title", error.toException());
+            }
+        });
+    }
+
+    public void modifyJobDesc(String jobKey, String jobDesc, FirebaseUseCase.OnProfileUpdateComplete callback) {
+        Query query = jobsRef.orderByChild("jobKey").equalTo(jobKey);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        String jobID = userSnapshot.getKey();
+                        jobsRef.child(jobID).child("jobDescription").setValue(jobDesc).addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                callback.onComplete();
+                            }
+                        });
+                    }
+                } else {
+                    Log.d("FirebaseUpdate", "No user found with email: " + jobDesc);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseUpdate", "Error updating job title", error.toException());
+            }
+        });
+    }
+
+    public void modifyJobLocation(String jobKey, String jobLocation, FirebaseUseCase.OnProfileUpdateComplete callback) {
+        Query query = jobsRef.orderByChild("jobKey").equalTo(jobKey);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        String jobID = userSnapshot.getKey();
+                        jobsRef.child(jobID).child("jobLocation").setValue(jobLocation).addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                callback.onComplete();
+                            }
+                        });
+                    }
+                } else {
+                    Log.d("FirebaseUpdate", "No user found with email: " + jobLocation);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseUpdate", "Error updating job title", error.toException());
+            }
+        });
+    }
+
+    public void modifyJobCategory(String jobKey, String jobCategory, FirebaseUseCase.OnProfileUpdateComplete callback) {
+        Query query = jobsRef.orderByChild("jobKey").equalTo(jobKey);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        String jobID = userSnapshot.getKey();
+                        jobsRef.child(jobID).child("jobCategory").setValue(jobCategory).addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                callback.onComplete();
+                            }
+                        });
+                    }
+                } else {
+                    Log.d("FirebaseUpdate", "No user found with email: " + jobCategory);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseUpdate", "Error updating job title", error.toException());
+            }
+        });
+    }
+
+    public void modifyJobHours(String jobKey, String jobHours, FirebaseUseCase.OnProfileUpdateComplete callback) {
+        Query query = jobsRef.orderByChild("jobKey").equalTo(jobKey);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        String jobID = userSnapshot.getKey();
+                        jobsRef.child(jobID).child("jobHours").setValue(jobHours).addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                callback.onComplete();
+                            }
+                        });
+                    }
+                } else {
+                    Log.d("FirebaseUpdate", "No user found with email: " + jobHours);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseUpdate", "Error updating job title", error.toException());
+            }
+        });
+    }
+
+    public void modifyJobPay(String jobKey, String jobPay, FirebaseUseCase.OnProfileUpdateComplete callback) {
+        Query query = jobsRef.orderByChild("jobKey").equalTo(jobKey);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        String jobID = userSnapshot.getKey();
+                        jobsRef.child(jobID).child("jobPay").setValue(jobPay).addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                callback.onComplete();
+                            }
+                        });
+                    }
+                } else {
+                    Log.d("FirebaseUpdate", "No user found with email: " + jobPay);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseUpdate", "Error updating job title", error.toException());
             }
         });
     }
