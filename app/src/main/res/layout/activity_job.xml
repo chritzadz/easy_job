@@ -29,6 +29,7 @@
                 android:layout_marginBottom="15dp"
                 android:orientation="horizontal">
                 <ImageView
+                    android:id="@+id/searchButtonImageViewJob"
                     app:tint="@color/white"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
@@ -39,18 +40,19 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/baseline_search_24"
                     />
-                <TextView
-                    android:id="@+id/searchTextViewJob"
+                <EditText
+                    android:background="@android:color/transparent"
+                    android:id="@+id/searchEditTextJob"
                     android:textColor="@color/white"
                     android:textColorHint="#B4AFAF"
                     android:layout_width="0dp"
                     android:layout_weight="0.8"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:hint="Search..."
+                    android:clickable="true"
+                    android:focusable="true"
                     android:textSize="16sp"/>
                 <ImageView
                     app:tint="@color/white"

@@ -3,6 +3,8 @@ package com.example.template.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +24,8 @@ import java.util.List;
 
 public class JobActivity extends AppCompatActivity implements JobAdapter.JobClickListener{
     User currUser = CurrentUser.getInstance().getUser();
-    TextView searchInput;
+    ImageView searchButton;
+    EditText searchInput;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +40,25 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.JobClic
     }
 
     private void setEventListeners() {
+        searchButton.setOnClickListener(v -> updateJobList(String.valueOf(searchInput.getText())));
+    }
+
+    private void updateJobList(String searchInput) {
+        RecyclerView resultView = findViewById(R.id.jobListRecyclerViewJob);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        resultView.setLayoutManager(manager);
+
+        DividerItemDecoration decoration = new DividerItemDecoration(resultView.getContext(), manager.getOrientation());
+        resultView.addItemDecoration(decoration);
+
+        JobAdapter adapter = new JobAdapter(FirebaseUseCase.getJobsByCriteria(currUser.getEmail(), searchInput));
+        adapter.setJobClickListener(this);
+        resultView.setAdapter(adapter);
     }
 
     private void setContents() {
-        searchInput = findViewById(R.id.searchTextViewJob);
+        searchInput = findViewById(R.id.searchEditTextJob);
+        searchButton = findViewById(R.id.searchButtonImageViewJob);
 
         RecyclerView resultView = findViewById(R.id.jobListRecyclerViewJob);
         LinearLayoutManager manager = new LinearLayoutManager(this);
@@ -49,7 +67,10 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.JobClic
         DividerItemDecoration decoration = new DividerItemDecoration(resultView.getContext(), manager.getOrientation());
         resultView.addItemDecoration(decoration);
 
-        JobAdapter adapter = new JobAdapter(FirebaseUseCase.getJobsFromOthers(currUser.getEmail()));
+        JobAdapter adapter = new JobAdapter(FirebaseUseCase.getJobsByCriteria(
+                currUser.getEmail(),
+                String.valueOf(searchInput.getText())
+        ));
         adapter.setJobClickListener(this);
         resultView.setAdapter(adapter);
 

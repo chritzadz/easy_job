@@ -113,6 +113,23 @@ public class FirebaseUseCase {
         return tempList;
     }
 
+    /**
+     * @param searchInput is used for the user search input (filtered category and job title)
+     * */
+    public static List<Job> getJobsByCriteria(String currUserEmail, String searchInput){
+        updateEntities();
+        ArrayList<Job> tempList = new ArrayList<>();
+        if (searchInput.isEmpty() || searchInput == null){
+            return getJobsFromOthers(currUserEmail);
+        }
+        for(Job j: jobList){
+            if (!j.getJobEmail().equals(currUserEmail) && j.getJobTitle().contains(searchInput) || j.getJobCategory().contains(searchInput)){
+                tempList.add(j);
+            }
+        }
+        return tempList;
+    }
+
     public static void updateJob(String jobKey, String jobTitle, String jobDesc, String jobLocation, String jobCategory, String jobHours, String jobPay, OnJobUpdateComplete callback) {
         final int[] completed = {0};
         OnProfileUpdateComplete internalCallback = () -> {
