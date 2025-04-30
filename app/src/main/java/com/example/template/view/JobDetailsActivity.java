@@ -4,6 +4,7 @@ import static java.lang.Integer.parseInt;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,13 +13,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.template.Firebase.FirebaseUseCase;
 import com.example.template.R;
+import com.example.template.model.Application;
+import com.example.template.model.CurrentUser;
 import com.example.template.model.Job;
+import com.example.template.model.User;
 import com.example.template.util.LocationHelper;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -33,6 +36,8 @@ public class JobDetailsActivity extends AppCompatActivity implements OnMapReadyC
     ImageView backButton;
     MapView googleMap;
     Job job = null;
+    Button applyButton;
+    User currUser = CurrentUser.getInstance().getUser();
     private GoogleMap mMap;
 
     @Override
@@ -61,6 +66,17 @@ public class JobDetailsActivity extends AppCompatActivity implements OnMapReadyC
 
     private void setEventListeners() {
         backButton.setOnClickListener(v -> move2Dashboard());
+        applyButton.setOnClickListener(v -> applyJobApplication());
+    }
+
+    private void applyJobApplication() {
+        Application newApp = new Application(
+                currUser.getEmail(),
+                job.getJobEmail(),
+                job.getJobKey()
+        );
+        FirebaseUseCase.addApplication(newApp);
+        move2Dashboard();
     }
 
     private void move2Dashboard() {
@@ -77,6 +93,7 @@ public class JobDetailsActivity extends AppCompatActivity implements OnMapReadyC
         jobLocation = findViewById(R.id.jobLocationTextViewJobDetails);
         backButton = findViewById(R.id.backButtonImageViewManageJobDetails);
         googleMap = findViewById(R.id.jobLocationMapViewJobDetails);
+        applyButton = findViewById(R.id.applyButtonJobDetails);
 
         jobName.setText(job.getJobTitle());
         jobHours.setText( job.getJobHours()+" hrs");
@@ -84,7 +101,6 @@ public class JobDetailsActivity extends AppCompatActivity implements OnMapReadyC
         int total = parseInt(job.getJobPay()) * parseInt(job.getJobHours());
         jobTotal.setText("$"+total);
         jobLocation.setText(job.getJobLocation());
-
     }
 
     @Override

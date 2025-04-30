@@ -40,7 +40,7 @@ public class FirebaseUseCase {
         database.addJob(job);
     }
 
-    public void addApplication(Application application){
+    public static void addApplication(Application application){
         database.addApplication(application);
     }
     public static void addUser(User user){

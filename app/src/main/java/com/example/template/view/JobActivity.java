@@ -32,7 +32,6 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.JobClic
 
         setContentView(R.layout.activity_job);
 
-
         setContents();
         setEventListeners();
 

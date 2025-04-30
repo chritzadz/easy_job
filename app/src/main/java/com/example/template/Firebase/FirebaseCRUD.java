@@ -134,6 +134,7 @@ public class FirebaseCRUD {
     }
     public void addApplication(Application application){
         String appsId = appsRef.push().getKey();
+        application.setAppKey(appsId);
         if (appsId != null) {
             appsRef.child(appsId).setValue(application);
         }
