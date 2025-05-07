@@ -132,11 +132,15 @@ public class FirebaseCRUD {
             jobsRef.child(jobId).setValue(job);
         }
     }
-    public void addApplication(Application application){
+    public void addApplication(Application application, FirebaseUseCase.OnProcessApplication internalCallback){
         String appsId = appsRef.push().getKey();
         application.setAppKey(appsId);
         if (appsId != null) {
-            appsRef.child(appsId).setValue(application);
+            appsRef.child(appsId).setValue(application).addOnCompleteListener(task -> {
+                if (task.isSuccessful()){
+                    internalCallback.onComplete();
+                }
+            });
         }
     }
 
@@ -372,5 +376,10 @@ public class FirebaseCRUD {
                 Log.e("FirebaseUpdate", "Error updating job title", error.toException());
             }
         });
+    }
+
+    public void addJobApplication(String jobKey, String appKey, FirebaseUseCase.OnProcessApplication internalCallback) {
+        DatabaseReference jobAppRef = jobsRef.child(jobKey).child("applications");
+        jobAppRef.child(appKey).setValue(true).addOnCompleteListener(task -> internalCallback.onComplete());
     }
 }

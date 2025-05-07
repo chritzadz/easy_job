@@ -37,7 +37,6 @@ public class DashboardActivity extends AppCompatActivity implements JobAdapter.J
 
         setContentView(R.layout.activity_dashboard);
 
-
         setContents();
         setEventListeners();
 
@@ -54,6 +53,12 @@ public class DashboardActivity extends AppCompatActivity implements JobAdapter.J
         welcomeLabel = findViewById(R.id.welcomeTextViewDashboard);
         locationLabel = findViewById(R.id.locationTextViewDashboard);
 
+        updateWelcomeLabel();
+        showNavigation();
+        updateJobList();
+    }
+
+    private void updateJobList() {
         RecyclerView resultView = findViewById(R.id.jobListRecyclerViewDashboard);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         resultView.setLayoutManager(manager);
@@ -61,12 +66,9 @@ public class DashboardActivity extends AppCompatActivity implements JobAdapter.J
         DividerItemDecoration decoration = new DividerItemDecoration(resultView.getContext(), manager.getOrientation());
         resultView.addItemDecoration(decoration);
 
-        JobAdapter adapter = new JobAdapter(FirebaseUseCase.getJobsFromOthers(currUser.getEmail()));
+        JobAdapter adapter = new JobAdapter(FirebaseUseCase.getJobsByLocation(currUser.getEmail(), (String) locationLabel.getText()));
         adapter.setJobClickListener(this);
         resultView.setAdapter(adapter);
-
-        updateWelcomeLabel();
-        showNavigation();
     }
 
     private void updateWelcomeLabel() {
@@ -111,14 +113,18 @@ public class DashboardActivity extends AppCompatActivity implements JobAdapter.J
                     1001
             );
         }
-        new LocationHelper(this, (city, lat, lng)-> locationLabel.setText(city));
+        new LocationHelper(this, (city, lat, lng)-> {
+            currCity = city;
+            locationLabel.setText(city);
+            updateJobList();
+        });
     }
 
     @Override
     public void onJobClick(View view, int position) {
         Intent intent = new Intent(this, JobDetailsActivity.class);
 
-        List<Job> jobList = FirebaseUseCase.getJobsFromOthers(currUser.getEmail());
+        List<Job> jobList = FirebaseUseCase.getJobsByLocation(currUser.getEmail(), currCity);
 
         intent.putExtra("clickedJob", jobList.get(position));
         startActivity(intent);

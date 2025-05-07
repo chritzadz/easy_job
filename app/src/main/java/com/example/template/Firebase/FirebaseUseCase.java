@@ -25,7 +25,7 @@ public class FirebaseUseCase {
     public FirebaseUseCase() { /* Nothing */ }
 
     public static void set(Context context){
-        Log.e("set Databse", "HELLO");
+        Log.e("set Database", "HELLO");
         database = FirebaseCRUD.getInstance(context);
         updateEntities();
     }
@@ -40,8 +40,18 @@ public class FirebaseUseCase {
         database.addJob(job);
     }
 
-    public static void addApplication(Application application){
-        database.addApplication(application);
+    public static void addApplication(Application application, OnProcessApplication callback){
+        final int[] completed = {0};
+        OnProcessApplication internalCallback = () -> {
+            completed[0]++;
+            if (completed[0] == 2) {
+                callback.onComplete();
+            }
+            updateEntities();
+        };
+
+        database.addApplication(application, internalCallback);
+        database.addJobApplication(application.getJobKey(), application.getAppKey(), internalCallback);
     }
     public static void addUser(User user){
         database.addUser(user);
@@ -130,6 +140,22 @@ public class FirebaseUseCase {
         return tempList;
     }
 
+    public static List<Job> getJobsByLocation(String currUserEmail, String location){
+        updateEntities();
+        ArrayList<Job> tempList = new ArrayList<>();
+
+        if (location.isEmpty() || location == null){
+            return tempList;
+        }
+
+        for(Job j: jobList){
+            if (!j.getJobEmail().equals(currUserEmail) && j.getJobLocation().contains(location)){
+                tempList.add(j);
+            }
+        }
+        return tempList;
+    }
+
     public static void updateJob(String jobKey, String jobTitle, String jobDesc, String jobLocation, String jobCategory, String jobHours, String jobPay, OnJobUpdateComplete callback) {
         final int[] completed = {0};
         OnProfileUpdateComplete internalCallback = () -> {
@@ -157,6 +183,10 @@ public class FirebaseUseCase {
     }
 
     public interface OnJobUpdateComplete {
+        void onComplete();
+    }
+
+    public interface OnProcessApplication {
         void onComplete();
     }
 }

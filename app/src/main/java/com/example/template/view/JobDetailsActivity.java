@@ -26,7 +26,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
-public class JobDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class JobDetailsActivity extends AppCompatActivity implements OnMapReadyCallback, FirebaseUseCase.OnProcessApplication {
     TextView jobName;
     TextView jobHours;
     TextView jobPayRate;
@@ -75,8 +75,7 @@ public class JobDetailsActivity extends AppCompatActivity implements OnMapReadyC
                 job.getJobEmail(),
                 job.getJobKey()
         );
-        FirebaseUseCase.addApplication(newApp);
-        move2Dashboard();
+        FirebaseUseCase.addApplication(newApp, this::move2Dashboard);
     }
 
     private void move2Dashboard() {
@@ -110,5 +109,10 @@ public class JobDetailsActivity extends AppCompatActivity implements OnMapReadyC
         LatLng location = LocationHelper.getLatLngFromCity(job.getJobLocation(), this);
         mMap.addMarker(new MarkerOptions().position(location).title(job.getJobTitle()));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10.0f));
+    }
+
+    @Override
+    public void onComplete() {
+        move2Dashboard();
     }
 }
