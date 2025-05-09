@@ -30,7 +30,7 @@ import java.util.UUID;
 public class JobEditableAdapter extends RecyclerView.Adapter<JobEditableAdapter.JobEditableViewHolder> {
     private List<Job> jobs;
     private JobEditableClickListener listener;
-
+    private JobEditableClickListener editButtonListener;
     public JobEditableAdapter(List<Job> jobs){
         this.jobs = jobs;
     }
@@ -50,7 +50,13 @@ public class JobEditableAdapter extends RecyclerView.Adapter<JobEditableAdapter.
         holder.jobLocation.setText(job.getJobLocation());
         holder.jobTime.setText(job.getJobHours()+" hrs");
 
-        holder.editButton.setOnClickListener(v ->{
+        holder.editButton.setOnClickListener(v -> {
+            if (editButtonListener != null) {
+                editButtonListener.onJobEditButtonClick(v, position);
+            }
+        });
+
+        holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onJobEditableClick(v, position);
             }
@@ -66,8 +72,13 @@ public class JobEditableAdapter extends RecyclerView.Adapter<JobEditableAdapter.
         this.listener = listener;
     }
 
+    public void setJobEditButtonClickListener(JobEditableClickListener listener) {
+        this.editButtonListener = listener;
+    }
+
     public interface JobEditableClickListener {
         void onJobEditableClick(View view, int position);
+        void onJobEditButtonClick(View view, int position);
     }
 
     public static class JobEditableViewHolder extends RecyclerView.ViewHolder {

@@ -73,7 +73,15 @@ public class ManageJobListingActivity extends AppCompatActivity implements JobEd
 
     @Override
     public void onJobEditableClick(View view, int position) {
-        Intent intent = new Intent(this, EditJobActivity.class); //have not change this
+        Intent intent = new Intent(this, ManageApplicationActivity.class);
+        List<Job> jobList = FirebaseUseCase.getJobsFromSelf(currUser.getEmail());
+        intent.putExtra("jobClicked", jobList.get(position));
+        startActivity(intent);
+    }
+
+    @Override
+    public void onJobEditButtonClick(View view, int position) {
+        Intent intent = new Intent(this, EditJobActivity.class);
         List<Job> jobList = FirebaseUseCase.getJobsFromSelf(currUser.getEmail());
         intent.putExtra("jobClicked", jobList.get(position));
 

@@ -174,6 +174,18 @@ public class FirebaseUseCase {
         database.modifyJobPay(jobKey, jobPay, internalCallback);
     }
 
+    public static List<Application> getApplicationsByJob(Job clickedJob) {
+        updateEntities();
+        ArrayList<Application> tempList = new ArrayList<>();
+
+        for(Application a: appList){
+            if (a.getJobKey().equals(clickedJob.getJobKey())){
+                tempList.add(a);
+            }
+        }
+        return tempList;
+    }
+
     public interface OnRoleSwitchComplete {
         void onComplete();
     }
