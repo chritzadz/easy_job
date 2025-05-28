@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.room.Query;
 
+import com.example.template.R;
 import com.example.template.model.Application;
 import com.example.template.model.Job;
 import com.example.template.model.User;
@@ -101,11 +102,11 @@ public class FirebaseUseCase {
         return jobList;
     }
 
-    public static List<Job> getJobsFromOthers(String currUserEmail){
+    public static List<Job> getJobsFromOthers(Context context, String currUserEmail){
         updateEntities();
         ArrayList<Job> tempList = new ArrayList<>();
         for(Job j: jobList){
-            if (!j.getJobEmail().equals(currUserEmail)){
+            if (!j.getJobEmail().equals(currUserEmail) && j.getJobStatus().equals(context.getString(R.string.PENDING_STATUS))){
                 tempList.add(j);
             }
         }
@@ -126,14 +127,14 @@ public class FirebaseUseCase {
     /**
      * @param searchInput is used for the user search input (filtered category and job title)
      * */
-    public static List<Job> getJobsByCriteria(String currUserEmail, String searchInput){
+    public static List<Job> getJobsByCriteria(Context context, String currUserEmail, String searchInput){
         updateEntities();
         ArrayList<Job> tempList = new ArrayList<>();
         if (searchInput.isEmpty() || searchInput == null){
-            return getJobsFromOthers(currUserEmail);
+            return getJobsFromOthers(context, currUserEmail);
         }
         for(Job j: jobList){
-            if (!j.getJobEmail().equals(currUserEmail) && j.getJobTitle().contains(searchInput) || j.getJobCategory().contains(searchInput)){
+            if (!j.getJobEmail().equals(currUserEmail) && j.getJobStatus().equals(context.getString(R.string.PENDING_STATUS)) && j.getJobTitle().contains(searchInput) || j.getJobCategory().contains(searchInput)){
                 tempList.add(j);
             }
         }
@@ -149,7 +150,7 @@ public class FirebaseUseCase {
         }
 
         for(Job j: jobList){
-            if (!j.getJobEmail().equals(currUserEmail) && j.getJobLocation().contains(location)){
+            if (!j.getJobEmail().equals(currUserEmail) && j.getJobStatus().equals(R.string.PENDING_STATUS) && j.getJobLocation().contains(location)){
                 tempList.add(j);
             }
         }

@@ -50,7 +50,7 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.JobClic
         DividerItemDecoration decoration = new DividerItemDecoration(resultView.getContext(), manager.getOrientation());
         resultView.addItemDecoration(decoration);
 
-        JobAdapter adapter = new JobAdapter(FirebaseUseCase.getJobsByCriteria(currUser.getEmail(), searchInput));
+        JobAdapter adapter = new JobAdapter(FirebaseUseCase.getJobsByCriteria(this, currUser.getEmail(), searchInput));
         adapter.setJobClickListener(this);
         resultView.setAdapter(adapter);
     }
@@ -66,7 +66,7 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.JobClic
         DividerItemDecoration decoration = new DividerItemDecoration(resultView.getContext(), manager.getOrientation());
         resultView.addItemDecoration(decoration);
 
-        JobAdapter adapter = new JobAdapter(FirebaseUseCase.getJobsByCriteria(
+        JobAdapter adapter = new JobAdapter(FirebaseUseCase.getJobsByCriteria(this,
                 currUser.getEmail(),
                 String.valueOf(searchInput.getText())
         ));
@@ -98,7 +98,7 @@ public class JobActivity extends AppCompatActivity implements JobAdapter.JobClic
     public void onJobClick(View view, int position) {
         Intent intent = new Intent(this, JobDetailsActivity.class);
 
-        List<Job> jobList = FirebaseUseCase.getJobsFromOthers(currUser.getEmail());
+        List<Job> jobList = FirebaseUseCase.getJobsFromOthers(this, currUser.getEmail());
 
         intent.putExtra("clickedJob", jobList.get(position));
         startActivity(intent);

@@ -19,6 +19,7 @@ import com.example.template.R;
 import com.example.template.model.CurrentUser;
 import com.example.template.model.Job;
 import com.example.template.model.User;
+import com.example.template.status.AcceptStatus;
 
 import java.util.List;
 
@@ -73,10 +74,20 @@ public class ManageJobListingActivity extends AppCompatActivity implements JobEd
 
     @Override
     public void onJobEditableClick(View view, int position) {
-        Intent intent = new Intent(this, ManageApplicationActivity.class);
         List<Job> jobList = FirebaseUseCase.getJobsFromSelf(currUser.getEmail());
-        intent.putExtra("jobClicked", jobList.get(position));
-        startActivity(intent);
+        Job clickedJob = jobList.get(position);
+
+        if (!clickedJob.getJobStatus().equals(new AcceptStatus().message())){
+            Intent intent = new Intent(this, ManageApplicationActivity.class);
+            intent.putExtra("jobClicked", clickedJob);
+            startActivity(intent);
+        }
+        else{
+            //do nothing for now
+//            Intent intent = new Intent(this, IDKACITIVTT.class);
+//            startActivity(intent);
+        }
+
     }
 
     @Override
