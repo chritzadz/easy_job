@@ -31,6 +31,7 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
     public void onBindViewHolder(@NonNull ApplicationAdapter.ApplicationViewHolder holder, int position) {
         Application application = apps.get(position);
         holder.appKeyLabel.setText(application.getAppKey());
+        holder.appStatusLabel.setText(application.getStatus());
         holder.itemView.setOnClickListener(view -> {
             if (listener != null) {
                 listener.onApplicationClick(view, position);
@@ -53,9 +54,11 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
 
     public static class ApplicationViewHolder extends RecyclerView.ViewHolder {
         TextView appKeyLabel;
+        TextView appStatusLabel;
         public ApplicationViewHolder(View itemView) {
             super(itemView);
             appKeyLabel = itemView.findViewById(R.id.AppKeyLabelTextViewApplicationItem);
+            appStatusLabel = itemView.findViewById(R.id.AppStatusLabelTextViewApplicationItem);
         }
     }
 }

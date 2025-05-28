@@ -186,6 +186,19 @@ public class FirebaseUseCase {
         return tempList;
     }
 
+    public static void updateJobStatusAndApplication(Status s, OnUpdateJobAppStatus callback, Application clickedApp) {
+        final int[] completed = {0};
+        OnUpdateJobAppStatus internalCallback = () -> {
+            completed[0]++;
+            if (completed[0] == 2) {
+                callback.onComplete();
+            }
+        };
+
+        database.modifyJobStatus(clickedApp.getJobKey(), s, internalCallback);
+        database.modifyAppStatus(clickedApp.getAppKey(), s, internalCallback);
+    }
+
     public interface OnRoleSwitchComplete {
         void onComplete();
     }
@@ -199,6 +212,10 @@ public class FirebaseUseCase {
     }
 
     public interface OnProcessApplication {
+        void onComplete();
+    }
+
+    public interface OnUpdateJobAppStatus{
         void onComplete();
     }
 }

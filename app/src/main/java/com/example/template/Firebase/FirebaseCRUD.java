@@ -7,6 +7,7 @@ import com.example.template.R;
 import com.example.template.model.Application;
 import com.example.template.model.User;
 import com.example.template.model.Job;
+import com.example.template.status.Status;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -381,5 +382,57 @@ public class FirebaseCRUD {
     public void addJobApplication(String jobKey, String appKey, FirebaseUseCase.OnProcessApplication internalCallback) {
         DatabaseReference jobAppRef = jobsRef.child(jobKey).child("applications");
         jobAppRef.child(appKey).setValue(true).addOnCompleteListener(task -> internalCallback.onComplete());
+    }
+
+    public void modifyJobStatus(String jobKey, Status status, FirebaseUseCase.OnUpdateJobAppStatus callback){
+        Query query = jobsRef.orderByChild("jobKey").equalTo(jobKey);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        String jobID = userSnapshot.getKey();
+                        jobsRef.child(jobID).child("jobStatus").setValue(status.message()).addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                callback.onComplete();
+                            }
+                        });
+                    }
+                } else {
+                    Log.d("FirebaseUpdate", "No user found with email: " + status.message());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseUpdate", "Error updating job title", error.toException());
+            }
+        });
+    }
+
+    public void modifyAppStatus(String appKey, Status status, FirebaseUseCase.OnUpdateJobAppStatus callback){
+        Query query = appsRef.orderByChild("appKey").equalTo(appKey);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        String appID = userSnapshot.getKey();
+                        appsRef.child(appID).child("status").setValue(status.message()).addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                callback.onComplete();
+                            }
+                        });
+                    }
+                } else {
+                    Log.d("FirebaseUpdate", "No user found with email: " + status.message());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseUpdate", "Error updating job title", error.toException());
+            }
+        });
     }
 }
